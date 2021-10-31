@@ -1,5 +1,4 @@
 import GameView from "./scripts/game_view";
-import Game from "./scripts/game";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Hello World");
