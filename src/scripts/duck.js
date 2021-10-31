@@ -8,6 +8,8 @@ class Duck extends MovingObject{
     obj.color = 'brown';
 
     super(obj, game);
+
+    console.log(obj.vel);
   }
 }
 

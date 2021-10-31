@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameView = new GameView(new Game(), ctx);
   gameView.start();
 
-  
 
   // let img = new Image();
   // img.addEventListener('load', () => {
