@@ -1,8 +1,25 @@
+import GameView from "./scripts/game_view";
+import Game from "./scripts/game";
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Hello World");
   const gameboard = document.getElementById("gameboard");
+  gameboard.width = 800;
+  gameboard.height = 800;
   const ctx = gameboard.getContext('2d');
 
   ctx.fillStyle = 'lightblue';
-  ctx.fillRect(0, 0, 1000, 600);
+  ctx.fillRect(0, 0, 800, 800);
+
+  const gameView = new GameView(new Game(), ctx);
+  gameView.start();
+
+  
+
+  // let img = new Image();
+  // img.addEventListener('load', () => {
+  //   console.log("yay!")
+  //   ctx.drawImage(img, 30, 30);
+  // }, false)
+  // img.src = 'duck.png';
 })
