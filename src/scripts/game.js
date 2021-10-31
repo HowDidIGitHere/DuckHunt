@@ -1,5 +1,6 @@
 import Duck from "./duck";
 import Utility from "./utility";
+import Grass from "./grass";
 
 class Game {
   constructor() {
@@ -7,6 +8,7 @@ class Game {
     this.DIM_Y = 800;
     this.NUM_DUCKS = 2;
     this.ducks = this.addDucks();
+    this.grass = new Grass();
   }
 
   BG_COLOR = "lightblue";
@@ -34,6 +36,8 @@ class Game {
     for (let i = 0; i < this.ducks.length; i++) {
       this.ducks[i].draw(ctx);
     }
+
+    this.grass.draw(ctx);
   }
 
   moveObjects() {
