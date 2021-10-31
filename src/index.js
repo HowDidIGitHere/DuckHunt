@@ -11,9 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   ctx.fillStyle = 'lightblue';
   ctx.fillRect(0, 0, 800, 800);
 
-  const gameView = new GameView(new Game(), ctx);
+  const gameView = new GameView(ctx, gameboard);
   gameView.start();
-
 
   // let img = new Image();
   // img.addEventListener('load', () => {

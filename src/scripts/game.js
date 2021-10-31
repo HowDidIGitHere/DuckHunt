@@ -3,12 +3,36 @@ import Utility from "./utility";
 import Grass from "./grass";
 
 class Game {
-  constructor() {
+  constructor(gameboard) {
     this.DIM_X = 800;
     this.DIM_Y = 800;
     this.NUM_DUCKS = 2;
     this.ducks = this.addDucks();
     this.grass = new Grass();
+    this.gameboard = gameboard;
+
+    
+    const gameboardLeft = gameboard.offsetLeft + gameboard.clientLeft;
+    const gameboardTop = gameboard.offsetTop + gameboard.clientTop;
+
+    function collision(clickPos, obj) {
+      const x = Math.pow(Math.abs(obj.pos[0] - clickPos[0]), 2);
+      const y = Math.pow(Math.abs(obj.pos[1] - clickPos[1]), 2);
+      const d = Math.sqrt(x + y);
+      return d < obj.radius;
+    }
+
+    gameboard.addEventListener('click', (e) => {
+      const x = e.pageX - gameboardLeft;
+      const y = e.pageY - gameboardTop;
+
+      for (let i = 0; i < this.ducks.length; i++) {
+        const obj = this.ducks[i];
+        if (collision([x, y], obj)) {
+          alert('boom!');
+        }
+      }
+    })
   }
 
   BG_COLOR = "lightblue";
@@ -66,7 +90,6 @@ class Game {
       break;
     }
   }
-
 }
 
 export default Game;

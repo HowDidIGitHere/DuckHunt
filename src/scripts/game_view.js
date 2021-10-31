@@ -1,8 +1,8 @@
 import Game from './game';
 
 class GameView {
-  constructor(game, ctx) {
-    this.game = game;
+  constructor(ctx, gameboard) {
+    this.game = new Game(gameboard);
     this.ctx = ctx;
   }
 
@@ -24,7 +24,6 @@ class GameView {
 
   //   requestAnimationFrame(this.animate.bind(this));
   // }
-
 }
 
 export default GameView;
