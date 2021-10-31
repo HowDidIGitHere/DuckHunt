@@ -7,23 +7,23 @@ class GameView {
   }
 
   start() {
-    // setInterval(() => {
-    //   this.game.moveObjects();
-    //   this.game.draw(this.ctx);
-    // }, 1);
-    this.lastTime = 0;
-    requestAnimationFrame(this.animate.bind(this));
+    setInterval(() => {
+      this.game.moveObjects();
+      this.game.draw(this.ctx);
+    }, 1);
+    // this.lastTime = 0;
+    // requestAnimationFrame(this.animate.bind(this));
   }
   
-  animate(time) {
-    const timeDelta = time - this.lastTime;
+  // animate(time) {
+  //   const timeDelta = time - this.lastTime;
 
-    this.game.step(timeDelta);
-    this.game.draw(this.ctx);
-    this.lastTime = time;
+  //   this.game.step(timeDelta);
+  //   this.game.draw(this.ctx);
+  //   this.lastTime = time;
 
-    requestAnimationFrame(this.animate.bind(this));
-  }
+  //   requestAnimationFrame(this.animate.bind(this));
+  // }
 
 }
 

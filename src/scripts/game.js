@@ -36,22 +36,30 @@ class Game {
     }
   }
 
-  moveObjects(delta) {
+  moveObjects() {
     for (let i = 0; i < this.ducks.length; i++) {
-      this.ducks[i].move(delta);
+      this.ducks[i].move();
     }
   }
 
-  isAlmostOutOfBounds(pos) {
-    return (pos[0] < 50) || (pos[1] < 50) || (pos[0] > this.DIM_X - 50) || (pos[1] > this.DIM_Y - 300);
-  }
-
-  changeDir() {
-    return Utility.randomVec(1);
-  }
-
-  step(delta) {
-    this.moveObjects(delta);
+  isAlmostOutOfBounds(duck) {
+    switch (true) {
+      case (duck.pos[0] < 50):
+        return [Math.abs(duck.vel[0]), duck.vel[1]]
+      break;
+      case (duck.pos[1] < 50):
+        return [duck.vel[0], Math.abs(duck.vel[1])]
+      break;
+      case (duck.pos[0] > duck.DIM_X - 50):
+        return [-1 * Math.abs(duck.vel[0]), duck.vel[1]]
+      break;
+      case (duck.pos[1] > duck.DIM_Y - 300):
+        return [duck.vel[0], -1 * Math.abs(duck.vel[1])]
+      break;
+      default:
+        return duck.vel;
+      break;
+    }
   }
 
 }

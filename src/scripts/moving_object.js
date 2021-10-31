@@ -23,17 +23,13 @@ class MovingObject {
     ctx.fill();
   }
 
-  move(delta) {
-    const NORMAL_FRAME_TIME_DELTA = 1000 / 60;
-    const velocityScale = delta / NORMAL_FRAME_TIME_DELTA,
-        offsetX = this.vel[0] * velocityScale,
-        offsetY = this.vel[1] * velocityScale;
-
-    let pos = [this.pos[0] + offsetX, this.pos[1] + offsetY];
+  move() {
+    let pos = [this.pos[0] + this.vel[0], this.pos[1] + this.vel[1]];
     this.pos = pos;
 
-    if (this.game.isAlmostOutOfBounds(this.pos)) {
-      this.vel = this.game.changeDir();
+    const dir = this.game.isAlmostOutOfBounds(this)
+    if (dir !== undefined) {
+      this.vel = dir;
     }
   }
 }
