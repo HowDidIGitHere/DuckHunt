@@ -12,11 +12,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const gameView = new GameView(ctx, gameboard);
   gameView.start();
-
-  // let img = new Image();
-  // img.addEventListener('load', () => {
-  //   console.log("yay!")
-  //   ctx.drawImage(img, 30, 30);
-  // }, false)
-  // img.src = 'duck.png';
 })

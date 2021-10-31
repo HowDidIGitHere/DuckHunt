@@ -1,6 +1,6 @@
 import Duck from "./duck";
 import Utility from "./utility";
-import Grass from "./grass";
+import Foreground from "./static_object";
 
 class Game {
   constructor(gameboard) {
@@ -8,18 +8,17 @@ class Game {
     this.DIM_Y = 800;
     this.NUM_DUCKS = 2;
     this.ducks = this.addDucks();
-    this.grass = new Grass();
+    this.foreground = new Foreground();
     this.gameboard = gameboard;
-
     
     const gameboardLeft = gameboard.offsetLeft + gameboard.clientLeft;
     const gameboardTop = gameboard.offsetTop + gameboard.clientTop;
 
-    function collision(clickPos, obj) {
-      const x = Math.pow(Math.abs(obj.pos[0] - clickPos[0]), 2);
-      const y = Math.pow(Math.abs(obj.pos[1] - clickPos[1]), 2);
+    function collision(clickPos, duck) {
+      const x = Math.pow(Math.abs(duck.pos[0] - clickPos[0]), 2);
+      const y = Math.pow(Math.abs(duck.pos[1] - clickPos[1]), 2);
       const d = Math.sqrt(x + y);
-      return d < obj.radius;
+      return d < duck.radius;
     }
 
     gameboard.addEventListener('click', (e) => {
@@ -27,8 +26,8 @@ class Game {
       const y = e.pageY - gameboardTop;
 
       for (let i = 0; i < this.ducks.length; i++) {
-        const obj = this.ducks[i];
-        if (collision([x, y], obj)) {
+        const duck = this.ducks[i];
+        if (collision([x, y], duck)) {
           alert('boom!');
         }
       }
@@ -61,7 +60,7 @@ class Game {
       this.ducks[i].draw(ctx);
     }
 
-    this.grass.draw(ctx);
+    this.foreground.draw(ctx);
   }
 
   moveObjects() {
@@ -71,24 +70,23 @@ class Game {
   }
 
   isAlmostOutOfBounds(duck) {
-    let randVec = Utility.randomVec(1);
+    const randVec = Utility.randomVec(1);
+    let vel = duck.vel;
     switch (true) {
       case (duck.pos[0] < 50):
-        return [Math.abs(randVec[0]), randVec[1]]
-      break;
+        vel = [Math.abs(randVec[0]), randVec[1]]
+        break;
       case (duck.pos[1] < 50):
-        return [randVec[0], Math.abs(randVec[1])]
-      break;
+        vel = [randVec[0], Math.abs(randVec[1])]
+        break;
       case (duck.pos[0] > this.DIM_X - 50):
-        return [-1 * Math.abs(randVec[0]), randVec[1]]
-      break;
+        vel = [-1 * Math.abs(randVec[0]), randVec[1]]
+        break;
       case (duck.pos[1] > this.DIM_Y - 300):
-        return [randVec[0], -1 * Math.abs(randVec[1])]
-      break;
-      default:
-        return duck.vel;
-      break;
+        vel = [randVec[0], -1 * Math.abs(randVec[1])]
+        break;
     }
+    return vel;
   }
 }
 
