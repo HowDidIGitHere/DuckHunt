@@ -17,7 +17,7 @@ class ClickedDuck extends MovingObject {
       this.pos = pos;
   
       const dir = this.game.isAlmostOutOfBounds(this)
-      if (dir !== this.vel) {
+      if (dir !== this.vel && this === this.game.ducks[idx]) {
         this.game.ducks.splice(idx, 1); 
       }
     }, 500);
