@@ -25,7 +25,7 @@ class Foreground {
     // ctx.fillRect(180, 680, 380, 80);
     ctx.strokeStyle = 'white';
     ctx.fillStyle = 'black';
-    this.roundRect(ctx, 180, 665, 380, 80, 10, true);
+    this.roundRect(ctx, 180, 665, 383, 80, 10, true);
     ctx.font = 'bold 35px Courier';
     ctx.fillStyle = '#03C04A';
     ctx.fillText('HIT', 192, 700)
@@ -34,7 +34,7 @@ class Foreground {
     // ctx.fillRect(600, 680, 160, 80);
     ctx.strokeStyle = 'white';
     ctx.fillStyle = 'black';
-    this.roundRect(ctx, 600, 665, 160, 80, 10, true);
+    this.roundRect(ctx, 603, 665, 157, 80, 10, true);
     ctx.font = 'bold 30px Courier';
     ctx.fillStyle = 'white';
     ctx.fillText('SCORE', 655, 732)

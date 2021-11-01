@@ -7,7 +7,7 @@ import UiTracker from "./ui_tracker";
 class Game {
   constructor(gameboard) {
     this.DIM_X = 800;
-    this.DIM_Y = 800;
+    this.DIM_Y = 770;
     this.NUM_DUCKS = 2;
     this.NUM_SHOTS = 3;
     this.SCORE = [0, 0, 0, 0, 0, 0]; // "000000";
@@ -15,7 +15,8 @@ class Game {
     // this.TIMER = ;
     this.ducks = this.addDucks();
     this.foreground = new Foreground();
-    this.ui = new UiTracker(this.SCORE, this.NUM_SHOTS, 10, 10); // NEED TO CHANGE LATER
+    this.ui = new UiTracker(this.SCORE, 10, 10); // NEED TO CHANGE LATER
+    console.log(this.ui);
     this.gameboard = gameboard;
     
     this.createOnClickListener();
@@ -59,7 +60,7 @@ class Game {
     }
 
     this.foreground.draw(ctx);
-    this.ui.draw(ctx, this.NUM_SHOTS);
+    this.ui.draw(ctx, this.NUM_SHOTS, this.ducks);
   }
 
   moveObjects() {
