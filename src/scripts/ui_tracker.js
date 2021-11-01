@@ -32,12 +32,15 @@ class UiTracker {
     }
   }
 
-  displayHit(ctx, ducks) {
-    for (let i = 0, j = 0; i < 2; i++, j += 29) {
-      if (ducks[i] instanceof Duck) {
-        ctx.drawImage(this.uiAssets, 53, 541, 20, 20, 264 + j, 675, 25, 25)
-      } else {
-        ctx.drawImage(this.uiAssets, 26, 541, 20, 20, 264 + j, 675, 25, 25)
+  displayHit(ctx, ducks) { // WORKING BUT A LITTLE SUS
+    let j = 0
+    for (let k = 0; k < 5; k++) {
+      for (let i = 0; i < 2; i++, j += 29) {
+        if (ducks[k][i] instanceof Duck) {
+          ctx.drawImage(this.uiAssets, 53, 541, 20, 20, 264 + j, 675, 25, 25)
+        } else {
+          ctx.drawImage(this.uiAssets, 26, 541, 20, 20, 264 + j, 675, 25, 25)
+        }
       }
     }
   }

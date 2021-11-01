@@ -8,12 +8,10 @@ class Game {
   constructor(gameboard) {
     this.DIM_X = 800;
     this.DIM_Y = 770;
-    this.NUM_DUCKS = 2;
     this.NUM_SHOTS = 3;
     this.SCORE = [0, 0, 0, 0, 0, 0]; // "000000";
-    // this.GAME_NUM_DUCKS = ;
     // this.TIMER = ;
-    this.ducks = this.addDucks();
+    this.ducks = this.populateAllDucks();
     this.foreground = new Foreground();
     this.ui = new UiTracker(this.SCORE, 10, 10); // NEED TO CHANGE LATER
     console.log(this.ui);
@@ -25,8 +23,8 @@ class Game {
   BG_COLOR = "#7AD7F0";
 
   removeDuck(idx) {
-    if (this.ducks[idx]) {
-      this.ducks.splice(idx, 1);      
+    if (this.ducks[0][idx]) {
+      this.ducks[0].splice(idx, 1);      
     }
   }
 
@@ -35,13 +33,21 @@ class Game {
     console.log(`${this.NUM_SHOTS} shots left.`)
   }
 
-  addDucks() {
-    const ducks = [];
-    while (ducks.length < this.NUM_DUCKS) {
+  addRoundDucks() {
+    const roundDucks = [];
+    while (roundDucks.length < 2) {
       const pos = this.randomStartPos();
-      ducks.push(new Duck({ pos }, this))
+      roundDucks.push(new Duck({ pos }, this))
     }
-    return ducks;
+    return roundDucks;
+  }
+
+  populateAllDucks() {
+    const allDucks = [];
+    for (let i = 0; i < 5; i++) {
+      allDucks.push(this.addRoundDucks());
+    }
+    return allDucks;
   }
 
   randomStartPos() {
@@ -55,8 +61,8 @@ class Game {
     ctx.fillStyle = this.BG_COLOR;
     ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
 
-    for (let i = 0; i < this.ducks.length; i++) {
-      this.ducks[i].draw(ctx);
+    for (let i = 0; i < this.ducks[0].length; i++) {
+      this.ducks[0][i].draw(ctx);
     }
 
     this.foreground.draw(ctx);
@@ -64,8 +70,8 @@ class Game {
   }
 
   moveObjects() {
-    for (let i = 0; i < this.ducks.length; i++) {
-      this.ducks[i].move(i);
+    for (let i = 0; i < this.ducks[0].length; i++) {
+      this.ducks[0][i].move(i);
     }
   }
 
@@ -97,11 +103,11 @@ class Game {
       const x = e.pageX - gameboardLeft;
       const y = e.pageY - gameboardTop;
 
-      for (let i = 0; i < this.ducks.length; i++) {
-        const duck = this.ducks[i];
+      for (let i = 0; i < this.ducks[0].length; i++) {
+        const duck = this.ducks[0][i];
         if (Utility.collision([x, y], duck)) {
           
-          this.ducks[i] = new ClickedDuck(this.ducks[i]);
+          this.ducks[0][i] = new ClickedDuck(this.ducks[0][i]);
           console.log(`${i} idx`)
         }
       }
