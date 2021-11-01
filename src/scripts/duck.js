@@ -12,7 +12,7 @@ class Duck extends MovingObject {
     console.log(obj.vel);
   }
 
-  move(game, idx) {
+  move(idx) {
     const pos = [this.pos[0] + this.vel[0], this.pos[1] + this.vel[1]];
     this.pos = pos;
 

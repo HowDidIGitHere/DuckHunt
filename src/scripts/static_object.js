@@ -1,5 +1,6 @@
 class Foreground {
-  constructor() {
+  constructor(score) {
+    this.score = score;
     this.img = new Image();
     this.img.addEventListener('load', () => {
       console.log("yay!")
@@ -10,22 +11,37 @@ class Foreground {
   draw(ctx) {
     ctx.drawImage(this.img, 0, 50, 800, 600);
     ctx.fillStyle = "#996700";
-    ctx.fillRect(0, 650, 800, 250)
+    ctx.fillRect(0, 650, 800, 220)
+    // ctx.strokeStyle = 'white';
     // ctx.fillStyle = 'black';
-    // ctx.fillRect(50, 680, 100, 80);
+    // ctx.fillRect(40, 680, 100, 80);
     ctx.strokeStyle = 'white';
     ctx.fillStyle = 'black';
-    this.roundRect(ctx, 40, 680, 100, 80, 10, true);
+    this.roundRect(ctx, 40, 665, 100, 80, 10, true);
+    ctx.font = 'bold 30px Courier';
+    ctx.fillStyle = '#3895D3';
+    ctx.fillText('SHOT', 53, 732)
+    // ctx.strokeStyle = 'white';
     // ctx.fillStyle = 'black';
-    // ctx.fillRect(200, 680, 350, 80);
+    // ctx.fillRect(180, 680, 380, 80);
     ctx.strokeStyle = 'white';
     ctx.fillStyle = 'black';
-    this.roundRect(ctx, 180, 680, 350, 80, 10, true);
+    this.roundRect(ctx, 180, 665, 380, 80, 10, true);
+    ctx.font = 'bold 35px Courier';
+    ctx.fillStyle = '#03C04A';
+    ctx.fillText('HIT', 192, 700)
+    // ctx.strokeStyle = 'white';
     // ctx.fillStyle = 'black';
-    // ctx.fillRect(600, 680, 150, 80);
+    // ctx.fillRect(600, 680, 160, 80);
     ctx.strokeStyle = 'white';
     ctx.fillStyle = 'black';
-    this.roundRect(ctx, 570, 680, 190, 80, 10, true);
+    this.roundRect(ctx, 600, 665, 160, 80, 10, true);
+    ctx.font = 'bold 30px Courier';
+    ctx.fillStyle = 'white';
+    ctx.fillText('SCORE', 655, 732)
+    ctx.font = 'bold 30px Courier';
+    ctx.fillStyle = 'white';
+    ctx.fillText(`${this.score}`, 638, 700)
   }
 
   // https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-using-html-canvas

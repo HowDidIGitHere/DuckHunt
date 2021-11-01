@@ -8,15 +8,16 @@ class Game {
     this.DIM_X = 800;
     this.DIM_Y = 800;
     this.NUM_DUCKS = 2;
-    this.ducks = this.addDucks();
-    this.foreground = new Foreground();
-    this.gameboard = gameboard;
     this.NUM_SHOTS = 3;
+    this.SCORE = "000000";
+    this.ducks = this.addDucks();
+    this.foreground = new Foreground(this.SCORE);
+    this.gameboard = gameboard;
     
     this.createOnClickListener();
   }
 
-  BG_COLOR = "lightblue";
+  BG_COLOR = "#7AD7F0";
 
   removeDuck(idx) {
     if (this.ducks[idx]) {
@@ -95,7 +96,7 @@ class Game {
         if (Utility.collision([x, y], duck)) {
           
           this.ducks[i] = new ClickedDuck(this.ducks[i]);
-          console.log(i)
+          console.log(`${i} idx`)
         }
       }
 
