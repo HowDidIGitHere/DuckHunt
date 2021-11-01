@@ -1,7 +1,6 @@
 import GameView from "./scripts/game_view";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Hello World");
   const gameboard = document.getElementById("gameboard");
   gameboard.width = 800;
   gameboard.height = 800;

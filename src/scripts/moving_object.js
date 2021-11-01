@@ -23,15 +23,6 @@ class MovingObject {
     ctx.fill();
   }
 
-  move() {
-    let pos = [this.pos[0] + this.vel[0], this.pos[1] + this.vel[1]];
-    this.pos = pos;
-
-    const dir = this.game.isAlmostOutOfBounds(this)
-    if (dir !== undefined) {
-      this.vel = dir;
-    }
-  }
 }
 
 export default MovingObject;

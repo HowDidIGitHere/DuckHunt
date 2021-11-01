@@ -1,4 +1,5 @@
 import Duck from "./duck";
+import ClickedDuck from "./clicked_duck";
 import Utility from "./utility";
 import Foreground from "./static_object";
 
@@ -28,7 +29,9 @@ class Game {
       for (let i = 0; i < this.ducks.length; i++) {
         const duck = this.ducks[i];
         if (collision([x, y], duck)) {
-          alert('boom!');
+          this.ducks[i] = new ClickedDuck(this.ducks[i]);
+          // this.ducks.splice(i, 1)
+          // this.ducks.push(new ClickedDuck(this[ducks[i]]));
         }
       }
     })
@@ -65,7 +68,7 @@ class Game {
 
   moveObjects() {
     for (let i = 0; i < this.ducks.length; i++) {
-      this.ducks[i].move();
+      this.ducks[i].move(i);
     }
   }
 

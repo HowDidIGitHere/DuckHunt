@@ -1,5 +1,4 @@
 import Game from './game';
-import Foreground from "./static_object";
 
 class GameView {
   constructor(ctx, gameboard) {
