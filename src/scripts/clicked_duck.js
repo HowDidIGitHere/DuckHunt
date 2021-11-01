@@ -8,20 +8,19 @@ class ClickedDuck extends MovingObject {
     super(duck, duck.game);
   }
 
-  moveHelper(idx) {
-  }
-
   move(idx) {
+    // Set frame to shot
     setTimeout(() => {
       const pos = [this.pos[0] + this.vel[0], this.pos[1] + this.vel[1]];
       this.pos = pos;
   
       const dir = this.game.isAlmostOutOfBounds(this)
       if (dir !== this.vel && this === this.game.ducks[idx]) {
-        this.game.ducks.splice(idx, 1); 
+        // this.game.ducks.splice(idx, 1);
+        this.game.removeDuck(idx);
       }
+      // Set frame to falling
     }, 500);
-    // this.movehelper(idx);
   }
 }
 

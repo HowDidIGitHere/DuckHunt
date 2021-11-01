@@ -11,33 +11,23 @@ class Game {
     this.ducks = this.addDucks();
     this.foreground = new Foreground();
     this.gameboard = gameboard;
+    this.NUM_SHOTS = 3;
     
-    const gameboardLeft = gameboard.offsetLeft + gameboard.clientLeft;
-    const gameboardTop = gameboard.offsetTop + gameboard.clientTop;
-
-    function collision(clickPos, duck) {
-      const x = Math.pow(Math.abs(duck.pos[0] - clickPos[0]), 2);
-      const y = Math.pow(Math.abs(duck.pos[1] - clickPos[1]), 2);
-      const d = Math.sqrt(x + y);
-      return d < duck.radius;
-    }
-
-    gameboard.addEventListener('click', (e) => {
-      const x = e.pageX - gameboardLeft;
-      const y = e.pageY - gameboardTop;
-
-      for (let i = 0; i < this.ducks.length; i++) {
-        const duck = this.ducks[i];
-        if (collision([x, y], duck)) {
-          this.ducks[i] = new ClickedDuck(this.ducks[i]);
-          // this.ducks.splice(i, 1)
-          // this.ducks.push(new ClickedDuck(this[ducks[i]]));
-        }
-      }
-    })
+    this.createOnClickListener();
   }
 
   BG_COLOR = "lightblue";
+
+  removeDuck(idx) {
+    if (this.ducks[idx]) {
+      this.ducks.splice(idx, 1);      
+    }
+  }
+
+  shotFired() {
+    this.NUM_SHOTS--;
+    console.log(`${this.NUM_SHOTS} shots left.`)
+  }
 
   addDucks() {
     const ducks = [];
@@ -90,6 +80,27 @@ class Game {
         break;
     }
     return vel;
+  }
+
+  createOnClickListener() {
+    const gameboardLeft = this.gameboard.offsetLeft + this.gameboard.clientLeft;
+    const gameboardTop = this.gameboard.offsetTop + this.gameboard.clientTop;
+
+    this.gameboard.addEventListener('click', (e) => {
+      const x = e.pageX - gameboardLeft;
+      const y = e.pageY - gameboardTop;
+
+      for (let i = 0; i < this.ducks.length; i++) {
+        const duck = this.ducks[i];
+        if (Utility.collision([x, y], duck)) {
+          
+          this.ducks[i] = new ClickedDuck(this.ducks[i]);
+          console.log(i)
+        }
+      }
+
+      this.shotFired();
+    })
   }
 }
 
