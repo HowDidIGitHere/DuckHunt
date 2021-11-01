@@ -2,6 +2,7 @@ import Duck from "./duck";
 import ClickedDuck from "./clicked_duck";
 import Utility from "./utility";
 import Foreground from "./static_object";
+import UiTracker from "./ui_tracker";
 
 class Game {
   constructor(gameboard) {
@@ -9,9 +10,12 @@ class Game {
     this.DIM_Y = 800;
     this.NUM_DUCKS = 2;
     this.NUM_SHOTS = 3;
-    this.SCORE = "000000";
+    this.SCORE = [0, 0, 0, 0, 0, 0]; // "000000";
+    // this.GAME_NUM_DUCKS = ;
+    // this.TIMER = ;
     this.ducks = this.addDucks();
-    this.foreground = new Foreground(this.SCORE);
+    this.foreground = new Foreground();
+    this.ui = new UiTracker(this.SCORE, this.NUM_SHOTS, 10, 10); // NEED TO CHANGE LATER
     this.gameboard = gameboard;
     
     this.createOnClickListener();
@@ -55,6 +59,7 @@ class Game {
     }
 
     this.foreground.draw(ctx);
+    this.ui.draw(ctx, this.NUM_SHOTS);
   }
 
   moveObjects() {

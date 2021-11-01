@@ -1,15 +1,14 @@
 class Foreground {
-  constructor(score) {
-    this.score = score;
-    this.img = new Image();
-    this.img.addEventListener('load', () => {
-      console.log("yay!")
+  constructor() {
+    this.foreground = new Image();
+    this.foreground.addEventListener('load', () => {
+      console.log('Loaded Foreground');
     }, false)
-    this.img.src = 'duck_hunt_foreground.png';
+    this.foreground.src = 'duck_hunt_foreground.png';
   }
 
   draw(ctx) {
-    ctx.drawImage(this.img, 0, 50, 800, 600);
+    ctx.drawImage(this.foreground, 0, 50, 800, 600);
     ctx.fillStyle = "#996700";
     ctx.fillRect(0, 650, 800, 220)
     // ctx.strokeStyle = 'white';
@@ -39,9 +38,6 @@ class Foreground {
     ctx.font = 'bold 30px Courier';
     ctx.fillStyle = 'white';
     ctx.fillText('SCORE', 655, 732)
-    ctx.font = 'bold 30px Courier';
-    ctx.fillStyle = 'white';
-    ctx.fillText(`${this.score}`, 638, 700)
   }
 
   // https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-using-html-canvas

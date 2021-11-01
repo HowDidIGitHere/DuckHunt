@@ -9,23 +9,23 @@ class MovingObject {
     this.sy = obj.sy;
     this.assets = new Image();
     this.assets.addEventListener('load', () => {
-      console.log("yay!")
+      console.log('Loaded Moving Objects');
     }, false)
     this.assets.src = 'duck_hunt_assets.png';
   }
 
   draw(ctx) {
-    // ctx.fillStyle = this.color;
-    // ctx.beginPath();
-    // ctx.arc(
-    //   this.pos[0],
-    //   this.pos[1],
-    //   this.radius,
-    //   0,
-    //   2 * Math.PI,
-    //   false
-    // )
-    // ctx.fill();
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(
+      this.pos[0],
+      this.pos[1],
+      this.radius,
+      0,
+      2 * Math.PI,
+      false
+    )
+    ctx.fill();
 
     ctx.drawImage(this.assets, 342, 300, 64, 58, this.pos[0], this.pos[1], 64, 58);
   }
