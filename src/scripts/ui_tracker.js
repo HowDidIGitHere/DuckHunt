@@ -24,6 +24,10 @@ class UiTracker {
     this.displayHit(ctx, ducks);
     // TIMER
     // this.timer(ctx);
+    // placeholder timer fill
+    ctx.font = 'bold 20px Courier';
+    ctx.fillStyle = '#3895D3';
+    ctx.fillText('||||||||||||||||||||||||||||||', 192, 728)
   }
 
   loadShots(ctx, numShots) {
@@ -33,20 +37,21 @@ class UiTracker {
   }
 
   displayHit(ctx, ducks) { // WORKING BUT A LITTLE SUS
-    let j = 0
-    for (let k = 0; k < 5; k++) {
-      for (let i = 0; i < 2; i++, j += 29) {
-        if (ducks[k][i] instanceof Duck) {
-          ctx.drawImage(this.uiAssets, 53, 541, 20, 20, 264 + j, 675, 25, 25)
+    let k = 0
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 2; j++, k += 29) {
+        if (ducks[i][j] instanceof Duck) {
+          ctx.drawImage(this.uiAssets, 53, 541, 20, 20, 264 + k, 675, 25, 25)
+          // ctx.drawImage(this.uiAssets, 71, 541, 1, 1, 264 + k, 675, 25, 25)
         } else {
-          ctx.drawImage(this.uiAssets, 26, 541, 20, 20, 264 + j, 675, 25, 25)
+          ctx.drawImage(this.uiAssets, 26, 541, 20, 20, 264 + k, 675, 25, 25)
+          // ctx.drawImage(this.uiAssets, 71, 541, 1, 1, 264 + k, 675, 25, 25)
         }
       }
     }
   }
 
   // timer(ctx) {
-
   // }
 }
 

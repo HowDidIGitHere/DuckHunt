@@ -14,7 +14,7 @@ class Foreground {
     // ctx.strokeStyle = 'white';
     // ctx.fillStyle = 'black';
     // ctx.fillRect(40, 680, 100, 80);
-    ctx.strokeStyle = 'white';
+    ctx.strokeStyle = '#A6D609';
     ctx.fillStyle = 'black';
     this.roundRect(ctx, 40, 665, 100, 80, 10, true);
     ctx.font = 'bold 30px Courier';
@@ -23,16 +23,16 @@ class Foreground {
     // ctx.strokeStyle = 'white';
     // ctx.fillStyle = 'black';
     // ctx.fillRect(180, 680, 380, 80);
-    ctx.strokeStyle = 'white';
+    ctx.strokeStyle = '#A6D609'; // '#03C04A';
     ctx.fillStyle = 'black';
     this.roundRect(ctx, 180, 665, 383, 80, 10, true);
     ctx.font = 'bold 35px Courier';
-    ctx.fillStyle = '#03C04A';
+    ctx.fillStyle = '#A6D609';
     ctx.fillText('HIT', 192, 700)
     // ctx.strokeStyle = 'white';
     // ctx.fillStyle = 'black';
     // ctx.fillRect(600, 680, 160, 80);
-    ctx.strokeStyle = 'white';
+    ctx.strokeStyle = '#A6D609';
     ctx.fillStyle = 'black';
     this.roundRect(ctx, 603, 665, 157, 80, 10, true);
     ctx.font = 'bold 30px Courier';
