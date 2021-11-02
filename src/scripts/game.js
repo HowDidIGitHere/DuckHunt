@@ -104,10 +104,17 @@ class Game {
       const y = e.pageY - gameboardTop;
 
       for (let i = 0; i < this.ducks[0].length; i++) {
-        if (Utility.collision([x, y], ducks[0][i])) {
-          
+        if (Utility.collision([x, y], this.ducks[0][i])) {
+          this.ducks[0][i].sliceX = 262;
+          this.ducks[0][i].sliceY = 460;
+          this.ducks[0][i].width = 62;
+          this.ducks[0][i].height = 58;
           this.ducks[0][i] = new ClickedDuck(this.ducks[0][i]);
-          console.log(`${i} idx`)
+          // duck.sliceX = 262;
+          // duck.sliceY = 460;
+          // duck.width = 62;
+          // duck.height = 58;
+          // console.log(`${i} idx`)
         }
       }
 
