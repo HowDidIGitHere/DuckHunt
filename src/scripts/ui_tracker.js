@@ -27,7 +27,7 @@ class UiTracker {
     // placeholder timer fill
     ctx.font = 'bold 20px Courier';
     ctx.fillStyle = '#3895D3';
-    ctx.fillText('||||||||||||||||||||||||||||||', 192, 728)
+    ctx.fillText('||||||||||||||||||||||||||||||', 192, 728) // 30 ticks
   }
 
   loadShots(ctx, numShots) {

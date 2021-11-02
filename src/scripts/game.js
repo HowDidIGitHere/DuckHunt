@@ -14,7 +14,7 @@ class Game {
     this.ducks = this.populateAllDucks();
     this.foreground = new Foreground();
     this.ui = new UiTracker(this.SCORE, 10, 10); // NEED TO CHANGE LATER
-    console.log(this.ui);
+    // console.log(this.ui);
     this.gameboard = gameboard;
     
     this.createOnClickListener();
@@ -104,8 +104,7 @@ class Game {
       const y = e.pageY - gameboardTop;
 
       for (let i = 0; i < this.ducks[0].length; i++) {
-        const duck = this.ducks[0][i];
-        if (Utility.collision([x, y], duck)) {
+        if (Utility.collision([x, y], ducks[0][i])) {
           
           this.ducks[0][i] = new ClickedDuck(this.ducks[0][i]);
           console.log(`${i} idx`)

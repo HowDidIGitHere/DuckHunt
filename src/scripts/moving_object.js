@@ -37,6 +37,13 @@ class MovingObject {
       this.height, this.pos[0], this.pos[1], this.width, this.height);
   }
 
+  changeFrame(changes) {
+    this.sliceX = changes.sliceX;
+    this.sliceY = changes.sliceY;
+    this.width = changes.width;
+    this.height = changes.height;
+  }
+
 }
 
 export default MovingObject;
