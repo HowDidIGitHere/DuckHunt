@@ -17,6 +17,8 @@ class Duck extends MovingObject {
   move(idx) {
     const pos = [this.pos[0] + this.vel[0], this.pos[1] + this.vel[1]];
     this.pos = pos;
+    const mid = [this.mid[0] + this.vel[0], this.mid[1] + this.vel[1]];
+    this.mid = mid;
 
     this.vel = this.game.isAlmostOutOfBounds(this)
   }

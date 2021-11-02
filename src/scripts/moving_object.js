@@ -1,4 +1,5 @@
 import Duck from "./duck";
+import Utility from "./utility";
 
 class MovingObject {
   constructor(obj, game) {
@@ -6,9 +7,10 @@ class MovingObject {
     this.vel = obj.vel;
     this.width = obj.width;
     this.height = obj.height;
-
     this.sliceX = obj.sliceX;
     this.sliceY = obj.sliceY;
+
+    this.mid = Utility.midpoint(this.pos[0], this.pos[1], this.width, this.height);
 
     // this.color = obj.color;
     // this.radius = obj.radius;
@@ -43,7 +45,7 @@ class MovingObject {
     if (this instanceof Duck) {
       switch (true) {
         // right-up
-        case this.vel[0] > 0 && this.vel[1] < 0:
+        case this.vel[0] > 0 && this.vel[1] < 0 :
           this.changeFrame({ sliceX: 342, sliceY: 301, width: 64, height: 58 })
           break;
         // left-up

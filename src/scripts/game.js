@@ -51,7 +51,7 @@ class Game {
   }
 
   randomStartPos() {
-    let x = Math.floor(Math.random() * (this.DIM_X - 51)) + 51;
+    let x = Math.floor(Math.random() * (this.DIM_X - 76)) + 51;
     let y = this.DIM_Y - 301;
     return [x, y];
   }
@@ -79,16 +79,16 @@ class Game {
     const randVec = Utility.randomVec(1);
     let vel = duck.vel;
     switch (true) {
-      case (duck.pos[0] < 50):
+      case (duck.mid[0] < 50):
         vel = [Math.abs(randVec[0]), randVec[1]]
         break;
-      case (duck.pos[1] < 50):
+      case (duck.mid[1] < 50):
         vel = [randVec[0], Math.abs(randVec[1])]
         break;
-      case (duck.pos[0] > this.DIM_X - 50):
+      case (duck.mid[0] > this.DIM_X - 75):
         vel = [-1 * Math.abs(randVec[0]), randVec[1]]
         break;
-      case (duck.pos[1] > this.DIM_Y - 300):
+      case (duck.mid[1] > this.DIM_Y - 275):
         vel = [randVec[0], -1 * Math.abs(randVec[1])]
         break;
     }
