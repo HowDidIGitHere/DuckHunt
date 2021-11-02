@@ -11,11 +11,11 @@ const Utility = {
     return xy > duckXY && xy < duckXY + duckDIM;
   },
   downVec(length) {
-    return Utility.scale([0, 1], length);
+    return Utility.scale([0, 1.6], length);
   },
   randomVec(length) {
     const deg = 2 * Math.PI * Math.random();
-    return Utility.scale([Math.sin(deg), Math.cos(deg)], length);
+    return Utility.scale([1.6 * Math.sin(deg), 1.6 * Math.cos(deg)], length);
   },
   scale(vec, m) {
     return [vec[0] * m, vec[1] * m];

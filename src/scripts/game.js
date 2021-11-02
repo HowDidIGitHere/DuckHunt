@@ -105,15 +105,10 @@ class Game {
 
       for (let i = 0; i < this.ducks[0].length; i++) {
         if (Utility.collision([x, y], this.ducks[0][i])) {
-          this.ducks[0][i].sliceX = 262;
-          this.ducks[0][i].sliceY = 460;
-          this.ducks[0][i].width = 62;
-          this.ducks[0][i].height = 58;
+          console.log(`vel[0] = ${this.ducks[0][i].vel[0]}`)
+          console.log(`vel[1] = ${this.ducks[0][i].vel[1]}`)
+          this.ducks[0][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 })
           this.ducks[0][i] = new ClickedDuck(this.ducks[0][i]);
-          // duck.sliceX = 262;
-          // duck.sliceY = 460;
-          // duck.width = 62;
-          // duck.height = 58;
           // console.log(`${i} idx`)
         }
       }

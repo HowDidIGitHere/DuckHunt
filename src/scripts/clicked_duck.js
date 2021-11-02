@@ -16,7 +16,7 @@ class ClickedDuck extends MovingObject {
     // Set frame to shot
     if (this.pos[1] <= this.game.DIM_Y - 300) {
       setTimeout(() => {
-        console.log(this);
+        // console.log(this);
         const pos = [this.pos[0] + this.vel[0], this.pos[1] + this.vel[1]];
         this.pos = pos;
         const dir = this.game.isAlmostOutOfBounds(this)
@@ -25,7 +25,11 @@ class ClickedDuck extends MovingObject {
           this.game.removeDuck(idx);
         }
         // Set frame to falling
-        this.changeFrame({ sliceX: 356, sliceY: 458, width: 36, height: 60 })
+        if (Math.floor(this.pos[1]) % 2 === 0) {
+            this.changeFrame({ sliceX: 176, sliceY: 647, width: 36, height: 60 })
+        } else {
+            this.changeFrame({ sliceX: 356, sliceY: 457, width: 36, height: 60 })
+        }
       }, 500);
     }
   }

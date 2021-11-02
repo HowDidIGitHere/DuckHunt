@@ -1,3 +1,5 @@
+import Duck from "./duck";
+
 class MovingObject {
   constructor(obj, game) {
     this.pos = obj.pos;
@@ -13,11 +15,17 @@ class MovingObject {
     
     this.game = game;
 
-    this.assets = new Image();
-    this.assets.addEventListener('load', () => {
-      console.log('Loaded Moving Objects');
-    }, false)
-    this.assets.src = 'duck_hunt_assets.png';
+    // this.assets = new Image();
+    // this.assets.addEventListener('load', () => {
+    //   console.log('Loaded Moving Objects');
+    // }, false);
+    // this.assets.src = 'duck_hunt_assets.png';
+
+    this.mirrored = new Image();
+    this.mirrored.addEventListener('load', () => {
+      console.log('Loaded mirrored Objects');
+    }, false);
+    this.mirrored.src = 'mirrored_duck_hunt_assets.png';
   }
 
   draw(ctx) {
@@ -32,9 +40,31 @@ class MovingObject {
     //   false
     // )
     // ctx.fill();
-
-    ctx.drawImage(this.assets, this.sliceX, this.sliceY, this.width, 
-      this.height, this.pos[0], this.pos[1], this.width, this.height);
+    if (this instanceof Duck) {
+      switch (true) {
+        // right-up
+        case this.vel[0] > 0 && this.vel[1] < 0:
+          this.changeFrame({ sliceX: 342, sliceY: 301, width: 64, height: 58 })
+          break;
+        // left-up
+        case this.vel[0] < 0 && this.vel[1] < 0:
+          this.changeFrame({ sliceX: 342, sliceY: 805, width: 64, height: 58 })
+          break;
+        // right-down
+        case this.vel[0] > 0 && this.vel[1] > 0:
+          this.changeFrame({ sliceX: 350, sliceY: 569, width: 58, height: 64 })
+          break;
+        // left-down
+        case this.vel[0] < 0 && this.vel[1] > 0:
+          this.changeFrame({ sliceX: 343, sliceY: 649, width: 58, height: 64 })
+          break;
+        // case this.vel[0] < 0 && this.vel[1] < 0:
+        //   this.changeFrame({ sliceX: 342, sliceY: 805, width: 64, height: 58 })
+        //   break;
+      }
+    }
+    ctx.drawImage(this.mirrored, this.sliceX, this.sliceY, this.width, 
+      this.height, this.pos[0], this.pos[1], this.width * 1.5, this.height * 1.5);
   }
 
   changeFrame(changes) {
