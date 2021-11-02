@@ -15,9 +15,9 @@ class UiTracker {
 
   draw(ctx, numShots, ducks) {
     // SCORE
-    ctx.font = 'bold 30px Courier';
+    ctx.font = 'bold 35px Courier';
     ctx.fillStyle = 'white';
-    ctx.fillText(`${this.score.join("")}`, 638, 700)
+    ctx.fillText(`${this.score.join("")}`, 619, 702)
     // SHOT
     this.loadShots(ctx, numShots);
     // HIT

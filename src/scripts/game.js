@@ -37,7 +37,7 @@ class Game {
     const roundDucks = [];
     while (roundDucks.length < 2) {
       const pos = this.randomStartPos();
-      roundDucks.push(new Duck({ pos }, this))
+      roundDucks.push(new Duck({ pos, sliceX: 342, sliceY: 300, width: 64, height: 58 }, this))
     }
     return roundDucks;
   }

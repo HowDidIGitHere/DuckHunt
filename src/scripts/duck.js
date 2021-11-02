@@ -5,11 +5,13 @@ class Duck extends MovingObject {
   constructor(obj, game) {
     obj.vel = Utility.randomVec(1);
     obj.radius = 30;
+    // obj.sx = ;
+    // obj.sy = ;
     obj.color = 'brown';
 
     super(obj, game);
 
-    console.log(obj.vel);
+    // console.log(obj.vel);
   }
 
   move(idx) {

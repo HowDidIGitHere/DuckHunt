@@ -5,6 +5,10 @@ import Utility from "./utility";
 class ClickedDuck extends MovingObject {
   constructor(duck) {
     duck.vel = Utility.downVec(1);
+    duck.sliceX = 262;
+    duck.sliceY = 460;
+    duck.width = 62;
+    duck.height = 58;
     super(duck, duck.game);
   }
 

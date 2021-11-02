@@ -37,7 +37,7 @@ class Foreground {
     this.roundRect(ctx, 603, 665, 157, 80, 10, true);
     ctx.font = 'bold 30px Courier';
     ctx.fillStyle = 'white';
-    ctx.fillText('SCORE', 655, 732)
+    ctx.fillText('SCORE', 654, 732)
   }
 
   // https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-using-html-canvas
