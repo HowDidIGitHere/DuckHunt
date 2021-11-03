@@ -2,7 +2,6 @@ const Utility = {
   midpoint(x1, y1, x2, y2) {
     const x = (x1 + (x1 + x2)) / 2;
     const y = (y1 + (y1 + y2)) / 2;
-    console.log(`pos: ${[x1, y1]}    mid?: ${[x, y]}    corner?: ${[x1 + x2, y1 + y2]}`)
     return [x, y];
   },
   collision(clickPos, duck) {
@@ -10,8 +9,8 @@ const Utility = {
     // const y = Math.pow(Math.abs(duck.pos[1] - clickPos[1]), 2);
     // const d = Math.sqrt(x + y);
     // return d < duck.radius;
-    return this.inBetweenXOrY(clickPos[0], duck.pos[0], duck.width) && 
-      this.inBetweenXOrY(clickPos[1], duck.pos[1], duck.height);
+    return this.inBetweenXOrY(clickPos[0], duck.pos[0], duck.width * 1.5) && 
+      this.inBetweenXOrY(clickPos[1], duck.pos[1], duck.height * 1.5);
   },
   inBetweenXOrY(xy, duckXY, duckDIM) {
     return xy > duckXY && xy < duckXY + duckDIM;

@@ -9,7 +9,7 @@ class Game {
     this.DIM_X = 800;
     this.DIM_Y = 770;
     this.NUM_SHOTS = 3;
-    this.SCORE = [0, 0, 0, 0, 0, 0]; // "000000";
+    this.SCORE = [0, 0, 0, 0, 0]; // "000000";
     // this.TIMER = ;
     this.ducks = this.populateAllDucks();
     this.foreground = new Foreground();
@@ -51,7 +51,7 @@ class Game {
   }
 
   randomStartPos() {
-    let x = Math.floor(Math.random() * (this.DIM_X - 76)) + 51;
+    let x = Math.floor(this.DIM_X / 2) - 50;
     let y = this.DIM_Y - 301;
     return [x, y];
   }
