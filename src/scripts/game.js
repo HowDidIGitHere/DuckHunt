@@ -97,9 +97,9 @@ class Game {
   }
 
   displayScore(pos, points) {
-    this.ctx.font = '22px Silkscreen';
+    this.ctx.font = '30px Silkscreen';
     this.ctx.fillStyle = 'white';
-    this.ctx.fillText(`${points}`, pos[0], pos[1]);
+    this.ctx.fillText(`${points}`, pos[0] - 14, pos[1] + 50);
   }
 
   updateScore(points) {
@@ -127,7 +127,7 @@ class Game {
       const y = e.pageY - gameboardTop;
 
       for (let i = 0; i < this.ducks[0].length; i++) {
-        if (Utility.collision([x, y], this.ducks[0][i])) {
+        if (this.ducks[0][i] instanceof Duck && Utility.collision([x, y], this.ducks[0][i])) {
           console.log(`vel[0] = ${this.ducks[0][i].vel[0]}`);
           console.log(`vel[1] = ${this.ducks[0][i].vel[1]}`);
           this.ducks[0][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
