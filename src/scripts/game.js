@@ -12,6 +12,8 @@ class Game {
     this.SCORE = "00000";
     this.TIMER = 10;
     this.ROUND = 0;
+    this.BG_COLOR = "#7AD7F0";
+    this.roundIsOver = false;
     this.ducks = this.populateAllDucks();
     this.foreground = new Foreground();
     this.ui = new UiTracker(10, this.TIMER); // NEED TO CHANGE LATER
@@ -22,12 +24,15 @@ class Game {
 
     // for (let i = 0; i < this.ducks.length; i += 1) {
       this.temp = setInterval(() => {
+        if (this.ROUND > 4) {
+          clearInterval(this.temp);
+        }
         this.moveObjects();
         this.draw(this.ctx);
         if (this.isOver()) {
         //   clearInterval(this.temp);
-          console.log(this.ducks[this.ROUND]);
-          // alert('ROUND OVER')
+          // console.log(this.ducks[this.ROUND]);
+          alert('ROUND OVER')
           this.ROUND += 1;
           this.NUM_SHOTS = 3;
           this.TIMER = 10; 
@@ -36,11 +41,12 @@ class Game {
     // }
   }
 
-  BG_COLOR = "#7AD7F0";
 
   removeDuck(idx) {
-    if (this.ducks[0][idx]) {
-      this.ducks[0].splice(idx, 1);  
+    if (this.ducks[this.ROUND][idx]) {
+      this.ducks[this.ROUND].splice(idx, 1);
+      console.log(this.ducks);
+      // this.ducks[this.ROUND] = this.ducks[this.ROUND].slice(idx, )
     }
   }
 
@@ -77,8 +83,8 @@ class Game {
     ctx.fillStyle = this.BG_COLOR;
     ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
 
-    for (let i = 0; i < this.ducks[0].length; i++) {
-      this.ducks[0][i].draw(ctx);
+    for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
+      this.ducks[this.ROUND][i].draw(ctx);
     }
 
     this.foreground.draw(ctx);
@@ -86,8 +92,8 @@ class Game {
   }
 
   moveObjects() {
-    for (let i = 0; i < this.ducks[0].length; i++) {
-      this.ducks[0][i].move(i);
+    for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
+      this.ducks[this.ROUND][i].move(i);
     }
   }
 
@@ -111,7 +117,7 @@ class Game {
     return vel;
   }
 
-  displayScore(pos, points) {
+  displayScore(pos, points) { // NEEDS REFACTOR
     this.ctx.font = '30px Silkscreen';
     this.ctx.fillStyle = 'white';
     this.ctx.fillText(`${points}`, pos[0] - 14, pos[1] + 50);
@@ -134,10 +140,9 @@ class Game {
   }
 
   isOver() {
-    if (this.NUM_SHOTS === 0 || this.timer === 0 || this.noMoreDucksInRound()) {
-      return true;
-    }
-    return false;
+    return ((!this.noMoreDucksInRound() && this.NUM_SHOTS === 0) || 
+      (!this.noMoreDucksInRound() && this.timer === 0) || 
+      this.ducks[this.ROUND].length === 0);
   }
 
   noMoreDucksInRound() {
@@ -158,13 +163,13 @@ class Game {
       const x = e.pageX - gameboardLeft;
       const y = e.pageY - gameboardTop;
 
-      for (let i = 0; i < this.ducks[0].length; i++) {
-        if (this.ducks[0][i] instanceof Duck && Utility.collision([x, y], this.ducks[0][i])) {
-          console.log(`vel[0] = ${this.ducks[0][i].vel[0]}`);
-          console.log(`vel[1] = ${this.ducks[0][i].vel[1]}`);
-          this.ducks[0][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
-          this.ducks[0][i] = new ClickedDuck(this.ducks[0][i]);
-          this.updateScore(this.ducks[0][i].points);
+      for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
+        if (this.ducks[this.ROUND][i] instanceof Duck && Utility.collision([x, y], this.ducks[this.ROUND][i])) {
+          console.log(`vel[0] = ${this.ducks[this.ROUND][i].vel[0]}`);
+          console.log(`vel[1] = ${this.ducks[this.ROUND][i].vel[1]}`);
+          this.ducks[this.ROUND][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
+          this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i]);
+          this.updateScore(this.ducks[this.ROUND][i].points);
           // console.log(`${i} idx`)
         }
       }
