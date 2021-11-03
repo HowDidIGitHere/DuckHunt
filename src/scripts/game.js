@@ -16,6 +16,7 @@ class Game {
     this.ui = new UiTracker(this.SCORE, 10, 10); // NEED TO CHANGE LATER
     // console.log(this.ui);
     this.gameboard = gameboard;
+    this.ctx = this.gameboard.getContext('2d');
     
     this.createOnClickListener();
   }
@@ -24,12 +25,11 @@ class Game {
 
   removeDuck(idx) {
     if (this.ducks[0][idx]) {
-      this.ducks[0].splice(idx, 1);      
+      this.ducks[0].splice(idx, 1);  
     }
   }
 
   shotFired() {
-    this.flashScreen();
     this.NUM_SHOTS--;
     console.log(`${this.NUM_SHOTS} shots left.`)
   }
@@ -38,7 +38,7 @@ class Game {
     const roundDucks = [];
     while (roundDucks.length < 2) {
       const pos = this.randomStartPos();
-      roundDucks.push(new Duck({ pos, sliceX: 0, sliceY: 0, width: 0, height: 0 }, this, 1))
+      roundDucks.push(new Duck({ pos, sliceX: 0, sliceY: 0, width: 0, height: 0 }, this, 1));
     }
     return roundDucks;
   }
@@ -96,11 +96,10 @@ class Game {
     return vel;
   }
 
-  flashScreen() {
-    const ctx = this.gameboard.getContext('2d');
-    ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
+  displayScore(pos, points) {
+    this.ctx.font = '22px Silkscreen';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText(`${points.join('')}`, pos[0], pos[1]);
   }
 
   createOnClickListener() {
@@ -113,14 +112,13 @@ class Game {
 
       for (let i = 0; i < this.ducks[0].length; i++) {
         if (Utility.collision([x, y], this.ducks[0][i])) {
-          console.log(`vel[0] = ${this.ducks[0][i].vel[0]}`)
-          console.log(`vel[1] = ${this.ducks[0][i].vel[1]}`)
-          this.ducks[0][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 })
+          console.log(`vel[0] = ${this.ducks[0][i].vel[0]}`);
+          console.log(`vel[1] = ${this.ducks[0][i].vel[1]}`);
+          this.ducks[0][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
           this.ducks[0][i] = new ClickedDuck(this.ducks[0][i]);
           // console.log(`${i} idx`)
         }
       }
-
       this.shotFired();
     })
   }

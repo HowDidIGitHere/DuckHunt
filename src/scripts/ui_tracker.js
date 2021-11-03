@@ -29,7 +29,7 @@ class UiTracker {
     // ctx.font = 'bold 20px Courier';
     ctx.font = '22px Silkscreen';
     ctx.fillStyle = '#3895D3';
-    ctx.fillText('|||||||||||||||||||||||||||||||||||||||||||||', 195, 728) // 30 ticks
+    ctx.fillText('|||||||||||||||||||||||||||||||||||||||||||||', 195, 728) // 45 ticks
   }
 
   loadShots(ctx, numShots) {

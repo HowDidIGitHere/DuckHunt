@@ -12,6 +12,7 @@ class Duck extends MovingObject {
     super(obj, game);
 
     this.flap = flap;
+    this.points = [1, 0, 0, 0];
 
     // console.log(obj.vel);
   }
