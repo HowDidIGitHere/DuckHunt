@@ -10,5 +10,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // ctx.fillRect(0, 0, 800, 770);
 
   const gameView = new GameView(ctx, gameboard);
-  gameView.start();
+  // gameView.start();
 })

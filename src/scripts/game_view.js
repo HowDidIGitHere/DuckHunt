@@ -7,10 +7,10 @@ class GameView {
   }
 
   start() {
-    setInterval(() => {
-      this.game.moveObjects();
-      this.game.draw(this.ctx);
-    }, 1);
+    // setInterval(() => {
+    //   this.game.moveObjects();
+    //   this.game.draw(this.ctx);
+    // }, 1);
     // this.lastTime = 0;
     // requestAnimationFrame(this.animate.bind(this));
   }

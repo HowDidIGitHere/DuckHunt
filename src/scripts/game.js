@@ -11,14 +11,29 @@ class Game {
     this.NUM_SHOTS = 3;
     this.SCORE = "00000";
     this.TIMER = 10;
+    this.ROUND = 0;
     this.ducks = this.populateAllDucks();
     this.foreground = new Foreground();
     this.ui = new UiTracker(10, this.TIMER); // NEED TO CHANGE LATER
-    // console.log(this.ui);
     this.gameboard = gameboard;
     this.ctx = this.gameboard.getContext('2d');
     
     this.createOnClickListener();
+
+    // for (let i = 0; i < this.ducks.length; i += 1) {
+      this.temp = setInterval(() => {
+        this.moveObjects();
+        this.draw(this.ctx);
+        if (this.isOver()) {
+        //   clearInterval(this.temp);
+          console.log(this.ducks[this.ROUND]);
+          // alert('ROUND OVER')
+          this.ROUND += 1;
+          this.NUM_SHOTS = 3;
+          this.TIMER = 10; 
+        }
+      }, 1);
+    // }
   }
 
   BG_COLOR = "#7AD7F0";
@@ -116,6 +131,23 @@ class Game {
     } else {
       this.SCORE = temp;
     }
+  }
+
+  isOver() {
+    if (this.NUM_SHOTS === 0 || this.timer === 0 || this.noMoreDucksInRound()) {
+      return true;
+    }
+    return false;
+  }
+
+  noMoreDucksInRound() {
+    let none = true;
+    this.ducks[this.ROUND].forEach(duck => {
+      if (duck instanceof Duck) {
+        none = false;
+      }
+    })
+    return none;
   }
 
   createOnClickListener() {
