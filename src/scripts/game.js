@@ -29,6 +29,7 @@ class Game {
   }
 
   shotFired() {
+    this.flashScreen();
     this.NUM_SHOTS--;
     console.log(`${this.NUM_SHOTS} shots left.`)
   }
@@ -93,6 +94,13 @@ class Game {
         break;
     }
     return vel;
+  }
+
+  flashScreen() {
+    const ctx = this.gameboard.getContext('2d');
+    ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
   }
 
   createOnClickListener() {

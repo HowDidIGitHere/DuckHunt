@@ -33,8 +33,8 @@ class UiTracker {
   }
 
   loadShots(ctx, numShots) {
-    for (let i = 0, j = 0; i < numShots; i++, j += 25) {
-      ctx.drawImage(this.uiAssets, 0, 541, 20, 20, 50 + j, 677, 27, 27);
+    for (let i = 0, j = 0; i < numShots; i++, j += 28) {
+      ctx.drawImage(this.uiAssets, 0, 541, 20, 20, 48 + j, 675, 27, 27);
     }
   }
 
