@@ -9,11 +9,11 @@ class Game {
     this.DIM_X = 800;
     this.DIM_Y = 770;
     this.NUM_SHOTS = 3;
-    this.SCORE = [0, 0, 0, 0, 0]; // "000000";
-    // this.TIMER = ;
+    this.SCORE = "00000";
+    this.TIMER = 10;
     this.ducks = this.populateAllDucks();
     this.foreground = new Foreground();
-    this.ui = new UiTracker(this.SCORE, 10, 10); // NEED TO CHANGE LATER
+    this.ui = new UiTracker(10, this.TIMER); // NEED TO CHANGE LATER
     // console.log(this.ui);
     this.gameboard = gameboard;
     this.ctx = this.gameboard.getContext('2d');
@@ -67,7 +67,7 @@ class Game {
     }
 
     this.foreground.draw(ctx);
-    this.ui.draw(ctx, this.NUM_SHOTS, this.ducks);
+    this.ui.draw(ctx, this.NUM_SHOTS, this.ducks, this.SCORE);
   }
 
   moveObjects() {
@@ -99,7 +99,23 @@ class Game {
   displayScore(pos, points) {
     this.ctx.font = '22px Silkscreen';
     this.ctx.fillStyle = 'white';
-    this.ctx.fillText(`${points.join('')}`, pos[0], pos[1]);
+    this.ctx.fillText(`${points}`, pos[0], pos[1]);
+  }
+
+  updateScore(points) {
+    let temp = (parseInt(this.SCORE) + points).toString();
+    if (temp.length < this.SCORE.length) {
+      let extended = '';
+      for (let i = 0; i < this.SCORE.length - temp.length; i++) {
+        extended += '0';
+      }
+      for (let i = 0; i < temp.length; i++) {
+        extended += temp[i];
+      }
+      this.SCORE = extended;
+    } else {
+      this.SCORE = temp;
+    }
   }
 
   createOnClickListener() {
@@ -116,6 +132,7 @@ class Game {
           console.log(`vel[1] = ${this.ducks[0][i].vel[1]}`);
           this.ducks[0][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
           this.ducks[0][i] = new ClickedDuck(this.ducks[0][i]);
+          this.updateScore(this.ducks[0][i].points);
           // console.log(`${i} idx`)
         }
       }

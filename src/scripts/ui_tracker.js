@@ -1,8 +1,7 @@
 import Duck from './duck';
 
 class UiTracker {
-  constructor(score, gameNumDucks, timer) {
-    this.score = score;
+  constructor(gameNumDucks, timer) {
     this.gameNumDucks = gameNumDucks;
     this.timer = timer;
 
@@ -13,12 +12,10 @@ class UiTracker {
     this.uiAssets.src = 'duck_hunt_assets.png';
   }
 
-  draw(ctx, numShots, ducks) {
+  draw(ctx, numShots, ducks, score) {
     // SCORE
     // ctx.font = 'bold 35px Courier';
-    ctx.font = '37px Silkscreen';
-    ctx.fillStyle = 'white';
-    ctx.fillText(`${this.score.join("")}`, 616, 702)
+    this.updateScoreAndDisplay(ctx, score);
     // SHOT
     this.loadShots(ctx, numShots);
     // HIT
@@ -27,9 +24,15 @@ class UiTracker {
     // this.timer(ctx);
     // placeholder timer fill
     // ctx.font = 'bold 20px Courier';
-    ctx.font = '22px Silkscreen';
+    ctx.font = '25px Silkscreen';
     ctx.fillStyle = '#3895D3';
-    ctx.fillText('|||||||||||||||||||||||||||||||||||||||||||||', 195, 728) // 45 ticks
+    ctx.fillText('||||||||||||||||||||||||||||||||||||||||', 193, 728) // 20 ticks
+  }
+
+  updateScoreAndDisplay(ctx, score) {
+    ctx.font = '37px Silkscreen';
+    ctx.fillStyle = 'white';
+    ctx.fillText(`${score}`, 616, 702)
   }
 
   loadShots(ctx, numShots) {
