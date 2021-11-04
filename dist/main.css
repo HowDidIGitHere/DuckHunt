@@ -34,10 +34,11 @@ a {
 }
 
 header {
+  display: flex;
+  align-items: flex-start;
   background-color: black;
   padding: 20px;
-  padding-bottom: 5px;
-  border-radius: 35px 35px 0px 0px;
+  border-radius: 35px 35px 35px 35px;
 }
 
 ul {
@@ -103,4 +104,34 @@ button {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+#game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+#panel {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+#screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  margin-right: 15px;
+}
+
+#panel > img {
+  margin-bottom: 30px;
 }

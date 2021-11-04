@@ -242,8 +242,8 @@ class Game {
     const gameboardTop = this.gameboard.offsetTop + this.gameboard.clientTop;
 
     this.gameboard.addEventListener('click', (e) => {
-      const x = e.pageX - gameboardLeft;
-      const y = e.pageY - gameboardTop;
+      const x = e.pageX - gameboardLeft + 130;
+      const y = e.pageY - gameboardTop - 5;
       // const x = e.clientX - gameboardLeft;
       // const y = e.clientY - gameboardTop - 179;
 
