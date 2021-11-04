@@ -1,4 +1,7 @@
 const Utility = {
+  isVeryOutOfBounds(mid) {
+    return mid[0] > 820 && mid[1] < -20;
+  },
   midpoint(x1, y1, x2, y2) {
     const x = (x1 + (x1 + x2)) / 2;
     const y = (y1 + (y1 + y2)) / 2;

@@ -18,6 +18,10 @@ class Duck extends MovingObject {
   }
 
   move(idx) {
+    if (this.game.roundIsOver) {
+      this.vel[0] = 1.28;
+      this.vel[1] = -1.28;
+    } 
     const pos = [this.pos[0] + this.vel[0], this.pos[1] + this.vel[1]];
     this.pos = pos;
     const mid = [this.mid[0] + this.vel[0], this.mid[1] + this.vel[1]];

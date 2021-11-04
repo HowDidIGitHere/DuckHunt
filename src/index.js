@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ctx.fillStyle = 'lightblue';
   // ctx.fillRect(0, 0, 800, 770);
-
+  
   const gameView = new GameView(ctx, gameboard);
   // gameView.start();
 })

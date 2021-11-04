@@ -22,25 +22,82 @@ class Game {
     
     this.createOnClickListener();
 
-    // for (let i = 0; i < this.ducks.length; i += 1) {
-      this.temp = setInterval(() => {
-        if (this.ROUND > 4) {
-          clearInterval(this.temp);
-        }
-        this.moveObjects();
-        this.draw(this.ctx);
-        if (this.isOver()) {
-        //   clearInterval(this.temp);
-          // console.log(this.ducks[this.ROUND]);
-          alert('ROUND OVER')
-          this.ROUND += 1;
-          this.NUM_SHOTS = 3;
-          this.TIMER = 10; 
-        }
-      }, 1);
+    this.playRound();
+
+    // // for (let i = 0; i < this.ducks.length; i += 1) {
+    //   this.temp = setInterval(() => {
+    //     if (this.ROUND > 4) {
+    //       clearInterval(this.temp);
+    //     }
+    //     this.moveObjects();
+    //     this.draw(this.ctx);
+    //     if (this.isOver()) {
+    //       this.roundIsOver = true;
+    //       this.roundIsOver = false;
+    //       setTimeout(() => {
+    //         //   clearInterval(this.temp);
+    //           console.log(this.ducks[this.ROUND]);
+    //           // alert('ROUND OVER')
+    //       }, 1000)
+    //       this.ROUND += 1;
+    //       this.NUM_SHOTS = 3;
+    //       this.TIMER = 10; 
+    //     }
+    //   }, 1);
     // }
+
+
+  }
+  
+  playRound() {
+    const interval = setInterval(() => {
+      // console.log(this.ROUND);
+      this.moveObjects();
+      this.draw(this.ctx);
+      if (this.isOver()) {
+        this.roundIsOver = true;
+        // const interval2 = setInterval(() => {
+        //   if (this.ducks[this.ROUND].length === 0) {
+        //     console.log('first')
+        //     this.roundIsOver = false;
+        //     this.ROUND += 1;
+        //     this.NUM_SHOTS = 3;
+        //     this.TIMER = 10;
+        //     clearInterval(interval2);
+        //   }
+        //   let bothOut = 0;
+        //   for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
+        //     if (!Utility.isVeryOutOfBounds(this.ducks[this.ROUND][i].mid)) {
+        //       bothOut += 1;
+        //     }
+        //   }
+        //   if (bothOut === this.ducks[this.ROUND].length) {
+        //     console.log('second')
+        //     this.roundIsOver = false;
+        //     this.ROUND += 1;
+        //     this.NUM_SHOTS = 3;
+        //     this.TIMER = 10;
+        //     clearInterval(interval2);
+        //   }
+        // }, 1)
+        // this.moveObjects();
+        // this.draw(this.ctx);
+        // this.NUM_SHOTS = 3;
+        // this.TIMER = 10;
+        // this.roundIsOver = false;
+        // this.ROUND += 1;
+        // clearInterval(interval);
+      }
+    }, 1)
   }
 
+  // transition() {
+  //   this.draw(this.ctx);
+  //   this.ROUND += 1;
+  //   this.NUM_SHOTS = 3;
+  //   this.TIMER = 10;
+  //   console.log(this.ROUND);
+  // }
 
   removeDuck(idx) {
     if (this.ducks[this.ROUND][idx]) {
@@ -73,7 +130,7 @@ class Game {
   }
 
   randomStartPos() {
-    let x = (Math.random() * this.DIM_X - 500) + 500;
+    let x = Math.floor(this.DIM_X / 2);
     let y = this.DIM_Y - 301;
     return [x, y];
   }
@@ -98,21 +155,23 @@ class Game {
   }
 
   isAlmostOutOfBounds(duck) {
-    const randVec = Utility.randomVec(1);
     let vel = duck.vel;
-    switch (true) {
-      case (duck.mid[0] < 50):
-        vel = [Math.abs(randVec[0]), randVec[1]]
-        break;
-      case (duck.mid[1] < 50):
-        vel = [randVec[0], Math.abs(randVec[1])]
-        break;
-      case (duck.mid[0] > this.DIM_X - 75):
-        vel = [-1 * Math.abs(randVec[0]), randVec[1]]
-        break;
-      case (duck.mid[1] > this.DIM_Y - 275):
-        vel = [randVec[0], -1 * Math.abs(randVec[1])]
-        break;
+    if (!this.roundIsOver) {
+      const randVec = Utility.randomVec(1);
+      switch (true) {
+        case (duck.mid[0] < 20):
+          vel = [Math.abs(randVec[0]), randVec[1]]
+          break;
+        case (duck.mid[1] < 20):
+          vel = [randVec[0], Math.abs(randVec[1])]
+          break;
+        case (duck.mid[0] > this.DIM_X - 120):
+          vel = [-1 * Math.abs(randVec[0]), randVec[1]]
+          break;
+        case (duck.mid[1] > this.DIM_Y - 300):
+          vel = [randVec[0], -1 * Math.abs(randVec[1])]
+          break;
+      }
     }
     return vel;
   }
@@ -165,8 +224,8 @@ class Game {
 
       for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
         if (this.ducks[this.ROUND][i] instanceof Duck && Utility.collision([x, y], this.ducks[this.ROUND][i])) {
-          console.log(`vel[0] = ${this.ducks[this.ROUND][i].vel[0]}`);
-          console.log(`vel[1] = ${this.ducks[this.ROUND][i].vel[1]}`);
+          // console.log(`vel[0] = ${this.ducks[this.ROUND][i].vel[0]}`);
+          // console.log(`vel[1] = ${this.ducks[this.ROUND][i].vel[1]}`);
           this.ducks[this.ROUND][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
           this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i]);
           this.updateScore(this.ducks[this.ROUND][i].points);

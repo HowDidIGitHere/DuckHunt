@@ -26,8 +26,8 @@ class ClickedDuck extends MovingObject {
         // console.log(this.game.ducks[this.game.ROUND][idx])
         if (dir[0] !== this.vel[0] && dir[1] !== this.vel[1] && this === this.game.ducks[this.game.ROUND][idx]) {
           // alert('hey')
-          // this.vel[0] = 0;
-          // this.vel[1] = 0;
+          this.vel[0] = 0;
+          this.vel[1] = 0;
           this.game.removeDuck(idx);
         }
         // Set frame to falling
