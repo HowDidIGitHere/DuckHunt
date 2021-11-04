@@ -73,14 +73,17 @@ class Game {
 
   overScreen() {
     console.log('done')
-    // alert('Game Over')
+    alert('Game Over')
   }
 
   playRound() {
     const interval = setInterval(() => {
       // console.log(this.ROUND);
       if (this.ROUND > 4) {
-        this.overScreen();
+        setTimeout(() => {
+          this.overScreen();
+          clearInterval(interval);
+        }, 1000)
         // clearInterval(interval);
       }
       this.moveObjects();
