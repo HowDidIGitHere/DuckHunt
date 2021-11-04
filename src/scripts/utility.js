@@ -16,7 +16,7 @@ const Utility = {
       this.inBetweenXOrY(clickPos[1], duck.pos[1], duck.height * 1.5);
   },
   inBetweenXOrY(xy, duckXY, duckDIM) {
-    return xy > duckXY && xy < duckXY + duckDIM;
+    return xy >= duckXY && xy <= duckXY + duckDIM;
   },
   downVec(length) {
     return Utility.scale([0, 1.6], length);

@@ -4,10 +4,10 @@ import MovingObject from "./moving_object";
 class Duck extends MovingObject {
   constructor(obj, game, flap) {
     obj.vel = Utility.randomVec(1);
-    obj.radius = 30;
+    // obj.radius = 30;
     // obj.sx = ;
     // obj.sy = ;
-    obj.color = 'brown';
+    // obj.color = 'brown';
 
     super(obj, game);
 

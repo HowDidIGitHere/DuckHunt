@@ -73,7 +73,7 @@ class Game {
 
   overScreen() {
     console.log('done')
-    alert('Game Over')
+    // alert('Game Over')
   }
 
   playRound() {
@@ -81,7 +81,7 @@ class Game {
       // console.log(this.ROUND);
       if (this.ROUND > 4) {
         this.overScreen();
-        clearInterval(interval);
+        // clearInterval(interval);
       }
       this.moveObjects();
       this.draw(this.ctx);
@@ -220,7 +220,7 @@ class Game {
   isOver() {
     return ((!this.noMoreDucksInRound() && this.NUM_SHOTS <= 0) || 
       (!this.noMoreDucksInRound() && this.timer <= 0) || 
-      this.ducks[this.ROUND].length === 0);
+      this.ducks[this.ROUND].length === 0) || this.roundIsOver;
   }
 
   noMoreDucksInRound() {
