@@ -243,8 +243,8 @@ class Game {
 
     this.gameboard.addEventListener('click', (e) => {
       if (this.NUM_SHOTS > 0) {
-        const x = e.pageX - gameboardLeft;// + 130;
-        const y = e.pageY - gameboardTop;// - 5;
+        const x = e.pageX - gameboardLeft + 130;
+        const y = e.pageY - gameboardTop - 5;
         // const x = e.clientX - gameboardLeft;
         // const y = e.clientY - gameboardTop - 179;
   
