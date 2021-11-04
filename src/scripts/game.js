@@ -3,6 +3,8 @@ import ClickedDuck from "./clicked_duck";
 import Utility from "./utility";
 import Foreground from "./static_object";
 import UiTracker from "./ui_tracker";
+import Dog from "./dog";
+import Logo from "./logo";
 
 class Game {
   constructor(gameboard) {
@@ -14,6 +16,8 @@ class Game {
     this.ROUND = 0;
     this.BG_COLOR = "#7AD7F0";
     this.roundIsOver = false;
+    this.dog = new Dog();
+    this.logo = new Logo();
     this.ducks = this.populateAllDucks();
     this.foreground = new Foreground();
     this.ui = new UiTracker(10, this.TIMER); // NEED TO CHANGE LATER
@@ -22,7 +26,7 @@ class Game {
     
     this.createOnClickListener();
 
-    this.doggo();
+    // this.doggo();
     this.playRound();
 
     // // for (let i = 0; i < this.ducks.length; i += 1) {
@@ -50,6 +54,22 @@ class Game {
 
   }
   
+  doggo() {
+    let i = 1;
+    setInterval(() => {
+      this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
+      this.ctx.fillStyle = this.BG_COLOR;
+      this.ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
+  
+      this.foreground.draw(this.ctx);
+      this.ui.draw(this.ctx, this.NUM_SHOTS, this.ducks, this.SCORE);
+      this.dog.draw(this.ctx);
+      this.logo.draw(this.ctx);
+      i++;
+      console.log(i);
+    }, 1)
+  }
+
   playRound() {
     const interval = setInterval(() => {
       // console.log(this.ROUND);
