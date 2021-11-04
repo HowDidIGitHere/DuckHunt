@@ -73,7 +73,7 @@ class Game {
 
   overScreen(timeout) {
     console.log('done');
-    alert('Game Over');
+    // alert('Game Over');
     clearTimeout(timeout);
   }
 
