@@ -22,6 +22,7 @@ class Game {
     
     this.createOnClickListener();
 
+    this.doggo();
     this.playRound();
 
     // // for (let i = 0; i < this.ducks.length; i += 1) {
@@ -56,38 +57,20 @@ class Game {
       this.draw(this.ctx);
       if (this.isOver()) {
         this.roundIsOver = true;
-        // const interval2 = setInterval(() => {
-        //   if (this.ducks[this.ROUND].length === 0) {
-        //     console.log('first')
-        //     this.roundIsOver = false;
-        //     this.ROUND += 1;
-        //     this.NUM_SHOTS = 3;
-        //     this.TIMER = 10;
-        //     clearInterval(interval2);
-        //   }
-        //   let bothOut = 0;
-        //   for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
-        //     if (!Utility.isVeryOutOfBounds(this.ducks[this.ROUND][i].mid)) {
-        //       bothOut += 1;
-        //     }
-        //   }
-        //   if (bothOut === this.ducks[this.ROUND].length) {
-        //     console.log('second')
-        //     this.roundIsOver = false;
-        //     this.ROUND += 1;
-        //     this.NUM_SHOTS = 3;
-        //     this.TIMER = 10;
-        //     clearInterval(interval2);
-        //   }
-        // }, 1)
-        // this.moveObjects();
-        // this.draw(this.ctx);
-        // this.NUM_SHOTS = 3;
-        // this.TIMER = 10;
-        // this.roundIsOver = false;
-        // this.ROUND += 1;
         // clearInterval(interval);
+        for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
+          if (Utility.isVeryOutOfBounds(this.ducks[this.ROUND][i].mid)) {
+            this.removeDuck(i);
+          }
+        }
+        if (this.ducks[this.ROUND].length === 0) {
+          this.ROUND += 1;
+          this.NUM_SHOTS = 3;
+          this.roundIsOver = false;
+        }
       }
+      // console.log(this.ducks)
+      // console.log(this.ROUND)
     }, 1)
   }
 
