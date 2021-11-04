@@ -242,24 +242,26 @@ class Game {
     const gameboardTop = this.gameboard.offsetTop + this.gameboard.clientTop;
 
     this.gameboard.addEventListener('click', (e) => {
-      const x = e.pageX - gameboardLeft + 130;
-      const y = e.pageY - gameboardTop - 5;
-      // const x = e.clientX - gameboardLeft;
-      // const y = e.clientY - gameboardTop - 179;
-
-      for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
-        if (this.ducks[this.ROUND][i] instanceof Duck && Utility.collision([x, y], this.ducks[this.ROUND][i])) {
-          // console.log(`vel[0] = ${this.ducks[this.ROUND][i].vel[0]}`);
-          // console.log(`vel[1] = ${this.ducks[this.ROUND][i].vel[1]}`);
-          this.ducks[this.ROUND][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
-          this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i]);
-          // this.ctx.fillStyle = 'black';
-          // this.ctx.fillRect[x, y, 4, 4];
-          this.updateScore(this.ducks[this.ROUND][i].points);
-          // console.log(`${i} idx`)
+      if (this.NUM_SHOTS > 0) {
+        const x = e.pageX - gameboardLeft;// + 130;
+        const y = e.pageY - gameboardTop;// - 5;
+        // const x = e.clientX - gameboardLeft;
+        // const y = e.clientY - gameboardTop - 179;
+  
+        for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
+          if (this.ducks[this.ROUND][i] instanceof Duck && Utility.collision([x, y], this.ducks[this.ROUND][i])) {
+            // console.log(`vel[0] = ${this.ducks[this.ROUND][i].vel[0]}`);
+            // console.log(`vel[1] = ${this.ducks[this.ROUND][i].vel[1]}`);
+            this.ducks[this.ROUND][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
+            this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i]);
+            // this.ctx.fillStyle = 'black';
+            // this.ctx.fillRect[x, y, 4, 4];
+            this.updateScore(this.ducks[this.ROUND][i].points);
+            // console.log(`${i} idx`)
+          }
         }
+        this.shotFired();
       }
-      this.shotFired();
     })
   }
 }
