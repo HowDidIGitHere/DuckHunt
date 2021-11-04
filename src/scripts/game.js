@@ -71,17 +71,18 @@ class Game {
   //   }, 1)
   // }
 
-  overScreen() {
-    console.log('done')
-    alert('Game Over')
+  overScreen(timeout) {
+    console.log('done');
+    alert('Game Over');
+    clearTimeout(timeout);
   }
 
   playRound() {
     const interval = setInterval(() => {
       // console.log(this.ROUND);
       if (this.ROUND > 4) {
-        setTimeout(() => {
-          this.overScreen();
+        const timeout = setTimeout(() => {
+          this.overScreen(timeout);
           clearInterval(interval);
         }, 1000)
         // clearInterval(interval);
