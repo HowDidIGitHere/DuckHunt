@@ -18,13 +18,14 @@ class Game {
     this.roundIsOver = false;
     this.dog = new Dog();
     this.logo = new Logo();
-    this.ducks = this.populateAllDucks();
+    this.ducks = this.populateAllDucks().concat([[new Duck({ pos: this.randomStartPos, vel: [0, 0], sliceX: 0, sliceY: 0, width: 0, height: 0 }, this, 1)]]);
     this.foreground = new Foreground();
     this.ui = new UiTracker(10, this.TIMER); // NEED TO CHANGE LATER
     this.gameboard = gameboard;
     this.ctx = this.gameboard.getContext('2d');
     
     this.createOnClickListener();
+    console.log(this.ducks)
 
     // this.doggo();
     this.playRound();
@@ -54,36 +55,51 @@ class Game {
 
   }
   
-  doggo() {
-    let i = 1;
-    setInterval(() => {
-      this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
-      this.ctx.fillStyle = this.BG_COLOR;
-      this.ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
+  // doggo() {
+  //   let i = 1;
+  //   setInterval(() => {
+  //     this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
+  //     this.ctx.fillStyle = this.BG_COLOR;
+  //     this.ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
   
-      this.foreground.draw(this.ctx);
-      this.ui.draw(this.ctx, this.NUM_SHOTS, this.ducks, this.SCORE);
-      this.dog.draw(this.ctx);
-      this.logo.draw(this.ctx);
-      i++;
-      console.log(i);
-    }, 1)
+  //     this.foreground.draw(this.ctx);
+  //     this.ui.draw(this.ctx, this.NUM_SHOTS, this.ducks, this.SCORE);
+  //     this.dog.draw(this.ctx);
+  //     this.logo.draw(this.ctx);
+  //     i++;
+  //     console.log(i);
+  //   }, 1)
+  // }
+
+  overScreen() {
+    console.log('done')
+    alert('Game Over')
   }
 
   playRound() {
     const interval = setInterval(() => {
       // console.log(this.ROUND);
+      if (this.ROUND > 4) {
+        this.overScreen();
+        clearInterval(interval);
+      }
       this.moveObjects();
       this.draw(this.ctx);
       if (this.isOver()) {
         this.roundIsOver = true;
         // clearInterval(interval);
+        // if () {
+
+        // }
+        let num = 0;
         for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
           if (Utility.isVeryOutOfBounds(this.ducks[this.ROUND][i].mid)) {
-            this.removeDuck(i);
+            num += 1;
           }
         }
-        if (this.ducks[this.ROUND].length === 0) {
+        console.log(this.ducks[this.ROUND].length)
+        if (this.ducks[this.ROUND].length === 0 || this.ducks[this.ROUND].length === num) {
+          console.log("ended")
           this.ROUND += 1;
           this.NUM_SHOTS = 3;
           this.roundIsOver = false;
@@ -202,8 +218,8 @@ class Game {
   }
 
   isOver() {
-    return ((!this.noMoreDucksInRound() && this.NUM_SHOTS === 0) || 
-      (!this.noMoreDucksInRound() && this.timer === 0) || 
+    return ((!this.noMoreDucksInRound() && this.NUM_SHOTS <= 0) || 
+      (!this.noMoreDucksInRound() && this.timer <= 0) || 
       this.ducks[this.ROUND].length === 0);
   }
 
@@ -223,7 +239,9 @@ class Game {
 
     this.gameboard.addEventListener('click', (e) => {
       const x = e.pageX - gameboardLeft;
-      const y = e.pageY - gameboardTop;
+      const y = e.pageY - gameboardTop - 179;
+      // const x = e.clientX - gameboardLeft;
+      // const y = e.clientY - gameboardTop - 179;
 
       for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
         if (this.ducks[this.ROUND][i] instanceof Duck && Utility.collision([x, y], this.ducks[this.ROUND][i])) {
@@ -231,6 +249,8 @@ class Game {
           // console.log(`vel[1] = ${this.ducks[this.ROUND][i].vel[1]}`);
           this.ducks[this.ROUND][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
           this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i]);
+          this.ctx.fillStyle = 'black';
+          this.ctx.fillRect[x, y, 4, 4];
           this.updateScore(this.ducks[this.ROUND][i].points);
           // console.log(`${i} idx`)
         }
