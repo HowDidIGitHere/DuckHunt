@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameboard = document.getElementById("gameboard");
   const modal = document.getElementById("myModal");
   const button = document.getElementById("instructions");
-  const span = document.getElementsByClassName("close")[0];
+  const close = document.getElementsByClassName("close")[0];
   gameboard.width = 800;
   gameboard.height = 770;
   const ctx = gameboard.getContext('2d');
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "block";
   })
   
-  span.addEventListener('click', () => {
+  close.addEventListener('click', () => {
     modal.style.display = "none";
   })
 

@@ -96,6 +96,8 @@ class MovingObject {
     if (this.flap > 75) {
       this.flap = 1;
     }
+    // ctx.fillstyle = 'brown';
+    // ctx.fillrect(this.pos[0], this.pos[1], this.width * 1.5, this.height * 1.5);
     ctx.drawImage(this.assets, this.sliceX, this.sliceY, this.width, 
       this.height, this.pos[0], this.pos[1], this.width * 1.5, this.height * 1.5);
   }

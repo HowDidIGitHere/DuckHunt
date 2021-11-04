@@ -224,7 +224,7 @@ class Game {
   isOver() {
     return ((!this.noMoreDucksInRound() && this.NUM_SHOTS <= 0) || 
       (!this.noMoreDucksInRound() && this.timer <= 0) || 
-      this.ducks[this.ROUND].length === 0) || this.roundIsOver;
+      (this.ducks[this.ROUND][0] instanceof ClickedDuck && this.ducks[this.ROUND][1] instanceof ClickedDuck) || this.roundIsOver);
   }
 
   noMoreDucksInRound() {
@@ -243,7 +243,7 @@ class Game {
 
     this.gameboard.addEventListener('click', (e) => {
       const x = e.pageX - gameboardLeft;
-      const y = e.pageY - gameboardTop // S- 179;
+      const y = e.pageY - gameboardTop - 179;
       // const x = e.clientX - gameboardLeft;
       // const y = e.clientY - gameboardTop - 179;
 
@@ -253,8 +253,8 @@ class Game {
           // console.log(`vel[1] = ${this.ducks[this.ROUND][i].vel[1]}`);
           this.ducks[this.ROUND][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
           this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i]);
-          this.ctx.fillStyle = 'black';
-          this.ctx.fillRect[x, y, 4, 4];
+          // this.ctx.fillStyle = 'black';
+          // this.ctx.fillRect[x, y, 4, 4];
           this.updateScore(this.ducks[this.ROUND][i].points);
           // console.log(`${i} idx`)
         }
