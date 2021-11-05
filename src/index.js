@@ -2,7 +2,7 @@ import GameView from "./scripts/game_view";
 
 document.addEventListener("DOMContentLoaded", () => {
   const gameboard = document.getElementById("gameboard");
-  const modal = document.getElementById("myModal");
+  const modal = document.getElementById("instructionsModal");
   const button = document.getElementById("instructions");
   const close = document.getElementsByClassName("close")[0];
   gameboard.width = 800;
