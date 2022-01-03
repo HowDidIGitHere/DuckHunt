@@ -48,7 +48,6 @@ ul {
 }
 
 h1, li {
-  font-family: Silkscreen;
   font-size: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -59,7 +58,8 @@ nav {
 }
 
 button {
-  font-family: Silkscreen;
+  font-family: Courier;
+  font-weight: bold;
   color: white;
   font-size: 14px;
   background-color: black;
@@ -96,7 +96,8 @@ button {
   color: black;
   float: right;
   font-size: 28px;
-  font-family: Silkscreen;
+  font-family: Courier;
+  font-weight: bold;
 }
 
 .close:hover,
