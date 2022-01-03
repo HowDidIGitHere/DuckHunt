@@ -17,18 +17,18 @@ class Foreground {
     ctx.strokeStyle = '#A6D609';
     ctx.fillStyle = 'black';
     this.roundRect(ctx, 40, 665, 100, 80, 10, true);
-    // ctx.font = 'bold 30px Courier';
-    ctx.font = '32px Silkscreen';
+    ctx.font = 'bold 30px Courier';
+    // ctx.font = '32px Silkscreen';
     ctx.fillStyle = '#3895D3';
-    ctx.fillText('SHOT', 47, 732)
+    ctx.fillText('SHOT', 53, 732)
     // ctx.strokeStyle = 'white';
     // ctx.fillStyle = 'black';
     // ctx.fillRect(180, 680, 380, 80);
     ctx.strokeStyle = '#A6D609'; // '#03C04A';
     ctx.fillStyle = 'black';
     this.roundRect(ctx, 180, 665, 383, 80, 10, true);
-    // ctx.font = 'bold 35px Courier';
-    ctx.font = '37px Silkscreen';
+    ctx.font = 'bold 35px Courier';
+    // ctx.font = '37px Silkscreen';
     ctx.fillStyle = '#A6D609';
     ctx.fillText('HIT', 192, 700)
     // ctx.strokeStyle = 'white';
@@ -37,10 +37,10 @@ class Foreground {
     ctx.strokeStyle = '#A6D609';
     ctx.fillStyle = 'black';
     this.roundRect(ctx, 603, 665, 157, 80, 10, true);
-    // ctx.font = 'bold 30px Courier';
-    ctx.font = '32px Silkscreen';
+    ctx.font = 'bold 30px Courier';
+    // ctx.font = '32px Silkscreen';
     ctx.fillStyle = 'white';
-    ctx.fillText('SCORE', 636, 732)
+    ctx.fillText('SCORE', 649, 732)
   }
 
   // https://stackoverflow.com/questions/1255512/how-to-draw-a-rounded-rectangle-using-html-canvas
