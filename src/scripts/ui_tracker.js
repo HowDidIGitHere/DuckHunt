@@ -23,16 +23,17 @@ class UiTracker {
     // TIMER
     // this.timer(ctx);
     // placeholder timer fill
-    // ctx.font = 'bold 20px Courier';
-    ctx.font = '25px Silkscreen';
+    ctx.font = 'bold 20px Courier';
+    // ctx.font = '25px Silkscreen';
     ctx.fillStyle = '#3895D3';
-    ctx.fillText('||||||||||||||||||||||||||||||||||||||||', 193, 728) // 20 ticks
+    ctx.fillText('||||||||||||||||||||||||||||||', 190, 728) // 20 ticks
   }
 
   updateScoreAndDisplay(ctx, score) {
-    ctx.font = '37px Silkscreen';
+    ctx.font = 'bold 40px Courier';
+    // ctx.font = '37px Silkscreen';
     ctx.fillStyle = 'white';
-    ctx.fillText(`${score}`, 616, 702)
+    ctx.fillText(`${score}`, 622, 702)
   }
 
   loadShots(ctx, numShots) {
