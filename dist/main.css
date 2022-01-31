@@ -11,9 +11,13 @@ body {
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  background-image: url("../fun_background.png");
-  background-position: center;
-  background-size: cover;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: cadetblue;
 }
 
 #gameboard {
