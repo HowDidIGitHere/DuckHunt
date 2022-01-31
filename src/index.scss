@@ -9,6 +9,10 @@ body {
   justify-content: center;
   align-content: center;
   flex-direction: column;
+
+  background-image: url('../fun_background.png');
+  background-position: center;
+  background-size: cover;
 }
 
 #gameboard {
@@ -135,7 +139,7 @@ button {
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  margin-right: 15px;
+  // margin-right: 15px;
 }
 
 #panel > img {
