@@ -23,9 +23,12 @@ class Game {
     this.ui = new UiTracker(10, this.TIMER); // NEED TO CHANGE LATER
     this.gameboard = gameboard;
     this.ctx = this.gameboard.getContext('2d');
+    this.shotSound = document.getElementById('shot');
+    this.duck_falls = document.getElementById('duck-falls');
+    this.game_over = document.getElementById('game-over');
     
     this.createOnClickListener();
-    console.log(this.ducks)
+    // console.log(this.ducks)
 
     // this.doggo();
     this.playRound();
@@ -52,7 +55,6 @@ class Game {
     //   }, 1);
     // }
 
-
   }
   
   // doggo() {
@@ -71,39 +73,72 @@ class Game {
   //   }, 1)
   // }
 
-  overScreen(timeout) {
-    console.log('done');
-    // alert('Game Over');
-    clearTimeout(timeout);
-  }
+  awaitFunc() {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        resolve();
+      }, 1000)
+    });
+  };
+
+  async interval() {
+    const _await = await this.awaitFunc();
+
+    setTimeout(this.interval, 1000);
+  };
+
+  // overScreen() {
+  //   // console.log('done');
+  //   // alert('Game Over');
+  //   clearTimeout(arguments[0]);
+  //   clearInterval(arguments[1]);
+  // }
+
+
 
   playRound() {
     const interval = setInterval(() => {
       // console.log(this.ROUND);
       if (this.ROUND > 4) {
         const timeout = setTimeout(() => {
-          this.overScreen(timeout);
           clearInterval(interval);
+          this.game_over.play();
+          this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
+          this.ctx.fillStyle = this.BG_COLOR;
+          this.ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
+          this.foreground.draw(this.ctx);
+          this.ui.draw(this.ctx, this.NUM_SHOTS, this.ducks, this.SCORE);
+          this.ctx.font = 'bold 70px Courier';
+          this.ctx.fillStyle = 'white';
+          this.ctx.fillText('GAME OVER', 300, 200);
+          
+          // this.
+
+          clearTimeout(timeout);
         }, 1000)
+        return;
+        // const timeout = setTimeout(() => {
+        //   this.overScreen(timeout, interval);
+        //   // clearInterval(interval);
+        //   this.ctx.font = ("75px 'Courier'");
+        //   this.ctx.fillText('GAME OVER', 60, 500)
+        // }, 1000)
         // clearInterval(interval);
       }
       this.moveObjects();
       this.draw(this.ctx);
       if (this.isOver()) {
+        
         this.roundIsOver = true;
-        // clearInterval(interval);
-        // if () {
-
-        // }
         let num = 0;
         for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
           if (Utility.isVeryOutOfBounds(this.ducks[this.ROUND][i].mid)) {
             num += 1;
           }
         }
-        console.log(this.ducks[this.ROUND].length)
+        // console.log(this.ducks[this.ROUND].length)
         if (this.ducks[this.ROUND].length === 0 || this.ducks[this.ROUND].length === num) {
-          console.log("ended")
+          // console.log("ended")
           this.ROUND += 1;
           this.NUM_SHOTS = 3;
           this.roundIsOver = false;
@@ -112,6 +147,7 @@ class Game {
       // console.log(this.ducks)
       // console.log(this.ROUND)
     }, 1)
+
   }
 
   // transition() {
@@ -125,14 +161,16 @@ class Game {
   removeDuck(idx) {
     if (this.ducks[this.ROUND][idx]) {
       this.ducks[this.ROUND].splice(idx, 1);
-      console.log(this.ducks);
+      // console.log(this.ducks);
       // this.ducks[this.ROUND] = this.ducks[this.ROUND].slice(idx, )
     }
   }
 
   shotFired() {
     this.NUM_SHOTS--;
-    console.log(`${this.NUM_SHOTS} shots left.`)
+    const clone = this.shotSound.cloneNode(true);
+    clone.play();
+    // console.log(`${this.NUM_SHOTS} shots left.`)
   }
 
   addRoundDucks() {
@@ -256,7 +294,7 @@ class Game {
             // console.log(`vel[0] = ${this.ducks[this.ROUND][i].vel[0]}`);
             // console.log(`vel[1] = ${this.ducks[this.ROUND][i].vel[1]}`);
             this.ducks[this.ROUND][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
-            this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i]);
+            this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i], this.duck_falls.cloneNode(true));
             // this.ctx.fillStyle = 'black';
             // this.ctx.fillRect[x, y, 4, 4];
             this.updateScore(this.ducks[this.ROUND][i].points);

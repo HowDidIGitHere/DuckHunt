@@ -19,13 +19,14 @@ class MovingObject {
 
     this.assets = new Image();
     this.assets.addEventListener('load', () => {
-      console.log('Loaded assets Objects');
+      // console.log('Loaded assets Objects');
     }, false);
     this.assets.src = 'mirrored_duck_hunt_assets.png';
   }
 
   draw(ctx) {
     if (this instanceof Duck) {
+      // const clone = this.game.flap.cloneNode(true);
       switch (true) {
         // right-up
         case this.vel[0] > 0 && this.vel[1] < 0 :
@@ -90,6 +91,7 @@ class MovingObject {
 
         // more down than right or left
         // NEEDS NEW SPRITE
+        
       }
     }
     this.flap += 1;

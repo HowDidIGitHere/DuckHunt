@@ -8,7 +8,6 @@ class Duck extends MovingObject {
     // obj.sx = ;
     // obj.sy = ;
     // obj.color = 'brown';
-
     super(obj, game);
 
     this.flap = flap;
