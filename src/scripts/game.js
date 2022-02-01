@@ -94,7 +94,40 @@ class Game {
   //   clearInterval(arguments[1]);
   // }
 
-
+  roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+    if (typeof stroke === 'undefined') {
+      stroke = true;
+    }
+    if (typeof radius === 'undefined') {
+      radius = 5;
+    }
+    if (typeof radius === 'number') {
+      radius = {tl: radius, tr: radius, br: radius, bl: radius};
+    } else {
+      var defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
+      for (var side in defaultRadius) {
+        radius[side] = radius[side] || defaultRadius[side];
+      }
+    }
+    ctx.beginPath();
+    ctx.moveTo(x + radius.tl, y);
+    ctx.lineTo(x + width - radius.tr, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+    ctx.lineTo(x + width, y + height - radius.br);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+    ctx.lineTo(x + radius.bl, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+    ctx.lineTo(x, y + radius.tl);
+    ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+    ctx.closePath();
+    if (fill) {
+      ctx.fill();
+    }
+    if (stroke) {
+      ctx.stroke();
+    }
+  
+  }
 
   playRound() {
     const interval = setInterval(() => {
@@ -112,10 +145,38 @@ class Game {
           this.ctx.fillStyle = 'white';
           this.ctx.fillText('GAME OVER', 300, 200);
           
-          // this.
+          const timeout2 = setTimeout(() => {
+            // this.ctx.clearRect(300, 250, this.DIM_X, 100);
+            // this.ctx.fillStyle = this.BG_COLOR;
+            // this.ctx.fillRect(300, 250, this.DIM_X, 100);
 
-          clearTimeout(timeout);
+            this.ctx.font = 'bold 35px Courier';
+            this.ctx.fillStyle = 'white';
+            this.ctx.fillText(this.SCORE === '10000' ? 'PERFECT SCORE!' : `YOU GOT ${this.SCORE[1]} DUCKS!`, this.SCORE === '10000' ? 350 : 325, 250);
+            // this.ctx.textAlign = 'center'
+            // clearTimeout(timeout2);
+          }, 1000);
+
+          const playAgain = setTimeout(() => {
+            const gameboardLeft = this.gameboard.offsetLeft + this.gameboard.clientLeft;
+            const gameboardTop = this.gameboard.offsetTop + this.gameboard.clientTop;
+
+
+            this.ctx.fillStyle = 'black';
+            // this.ctx.fillRect(485, 270, 160, 50);
+            this.ctx.strokeStyle = '#A6D609'; // '#03C04A';
+            this.roundRect(this.ctx, 485, 275, 160, 50, 10, true);
+
+            this.ctx.font = 'bold 20px Courier';
+            this.ctx.fillStyle = 'white';
+            this.ctx.fillText('Play Again?', 500, 305)
+          }, 2000);
+          // clearTimeout(timeout);
         }, 1000)
+        // const playAgain = setTimeout(() => {
+        //   this.ctx.font = 'bold 20px Courier';
+        //   this.ctx.fillStyle = 'white';
+        // })
         return;
         // const timeout = setTimeout(() => {
         //   this.overScreen(timeout, interval);
@@ -124,24 +185,25 @@ class Game {
         //   this.ctx.fillText('GAME OVER', 60, 500)
         // }, 1000)
         // clearInterval(interval);
-      }
-      this.moveObjects();
-      this.draw(this.ctx);
-      if (this.isOver()) {
-        
-        this.roundIsOver = true;
-        let num = 0;
-        for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
-          if (Utility.isVeryOutOfBounds(this.ducks[this.ROUND][i].mid)) {
-            num += 1;
+      } else {
+        this.moveObjects();
+        this.draw(this.ctx);
+        if (this.isOver()) {
+          
+          this.roundIsOver = true;
+          let num = 0;
+          for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
+            if (Utility.isVeryOutOfBounds(this.ducks[this.ROUND][i].mid)) {
+              num += 1;
+            }
           }
-        }
-        // console.log(this.ducks[this.ROUND].length)
-        if (this.ducks[this.ROUND].length === 0 || this.ducks[this.ROUND].length === num) {
-          // console.log("ended")
-          this.ROUND += 1;
-          this.NUM_SHOTS = 3;
-          this.roundIsOver = false;
+          // console.log(this.ducks[this.ROUND].length)
+          if (this.ducks[this.ROUND].length === 0 || this.ducks[this.ROUND].length === num) {
+            // console.log("ended")
+            this.ROUND += 1;
+            this.NUM_SHOTS = 3;
+            this.roundIsOver = false;
+          }
         }
       }
       // console.log(this.ducks)
@@ -280,8 +342,8 @@ class Game {
     const gameboardTop = this.gameboard.offsetTop + this.gameboard.clientTop;
 
     this.gameboard.addEventListener('click', (e) => {
-      if (this.NUM_SHOTS > 0) {
-        const x = e.pageX - gameboardLeft;
+      if (this.NUM_SHOTS > 0 && this.ROUND <= 4) {
+        const x = e.pageX - gameboardLeft - 5;
         const y = e.pageY - gameboardTop;
         // const x = e.pageX - gameboardLeft + 130;
         // const y = e.pageY - gameboardTop - 5;
@@ -302,6 +364,13 @@ class Game {
           }
         }
         this.shotFired();
+      } else if (this.ROUND > 4) {
+        const x = e.pageX - gameboardLeft - 7;
+        const y = e.pageY - gameboardTop - 7;
+  
+        if (x >= 485 && x <= 645 && y >= 275 && y <= 325) {
+          alert('works');
+        }
       }
     })
   }
