@@ -13,7 +13,7 @@ class ClickedDuck extends MovingObject {
 
   move(idx) {
     // Set frame to shot
-    if (this.mid[1] <= this.game.DIM_Y - 300) {
+    if (this.mid[1] <= this.game.DIM_Y - 250) {
       setTimeout(() => {
         this.game.displayScore(this.clickedSpot, this.points);
         // const clone = this.duck_falls.cloneNode(true);
