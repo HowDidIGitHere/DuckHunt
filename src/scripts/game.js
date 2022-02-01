@@ -141,55 +141,57 @@ class Game {
           this.ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
           this.foreground.draw(this.ctx);
           this.ui.draw(this.ctx, this.NUM_SHOTS, this.ducks, this.SCORE);
+
+          this.ctx.fillStyle = 'black';
+          this.ctx.strokeStyle = 'white';
+          this.roundRect(this.ctx, 280, 140, 420, 80, 10, true);
+
           this.ctx.font = 'bold 70px Courier';
           this.ctx.fillStyle = 'white';
           this.ctx.fillText('GAME OVER', 300, 200);
           
-          const timeout2 = setTimeout(() => {
-            // this.ctx.clearRect(300, 250, this.DIM_X, 100);
-            // this.ctx.fillStyle = this.BG_COLOR;
-            // this.ctx.fillRect(300, 250, this.DIM_X, 100);
-
-            this.ctx.font = 'bold 35px Courier';
-            this.ctx.fillStyle = 'white';
-            this.ctx.fillText(this.SCORE === '10000' ? 'PERFECT SCORE!' : `YOU GOT ${this.SCORE[1]} DUCKS!`, this.SCORE === '10000' ? 350 : 325, 250);
-            // this.ctx.textAlign = 'center'
-            // clearTimeout(timeout2);
-          }, 1000);
-
-          const playAgain = setTimeout(() => {
-            const gameboardLeft = this.gameboard.offsetLeft + this.gameboard.clientLeft;
-            const gameboardTop = this.gameboard.offsetTop + this.gameboard.clientTop;
-
+          setTimeout(() => { //Score
+            const output = {
+              '10000': {
+                res: 'PERFECT SCORE!',
+                pos: 350,
+                x: 318,
+              },
+              '01000': {
+                res: 'YOU GOT 1 DUCK!',
+                pos: 342,
+                x: 336,
+              },
+              '00000': {
+                res: 'BETTER LUCK NEXT TIME!',
+                pos: 266,
+                x: 482,
+              }
+            }
 
             this.ctx.fillStyle = 'black';
-            // this.ctx.fillRect(485, 270, 160, 50);
-            this.ctx.strokeStyle = '#A6D609'; // '#03C04A';
-            this.roundRect(this.ctx, 485, 275, 160, 50, 10, true);
+            this.ctx.strokeStyle = 'white';
+            this.roundRect(this.ctx, output[this.SCORE] ? output[this.SCORE].pos - 15 : 310, 227, output[this.SCORE] ? output[this.SCORE].x : 360, 50, 10, true);
+            this.ctx.font = 'bold 35px Courier';
+            this.ctx.fillStyle = 'white';
+            // this.ctx.fillText(this.SCORE === '10000' ? 'PERFECT SCORE!' : `YOU GOT ${this.SCORE[1]} DUCKS!`, this.SCORE === '10000' ? 350 : 325, 250);
+            this.ctx.fillText(output[this.SCORE] ? output[this.SCORE].res : `YOU GOT ${this.SCORE[1]} DUCKS!`, output[this.SCORE] ? output[this.SCORE].pos : 325, 262)
+          }, 1000);
+
+          setTimeout(() => { //Play Again button
+            this.ctx.fillStyle = 'black';
+            this.ctx.strokeStyle = 'white';
+            this.roundRect(this.ctx, 485, 285, 160, 50, 10, true);
 
             this.ctx.font = 'bold 20px Courier';
             this.ctx.fillStyle = 'white';
-            this.ctx.fillText('Play Again?', 500, 305)
+            this.ctx.fillText('Play Again?', 500, 315)
           }, 2000);
-          // clearTimeout(timeout);
         }, 1000)
-        // const playAgain = setTimeout(() => {
-        //   this.ctx.font = 'bold 20px Courier';
-        //   this.ctx.fillStyle = 'white';
-        // })
-        return;
-        // const timeout = setTimeout(() => {
-        //   this.overScreen(timeout, interval);
-        //   // clearInterval(interval);
-        //   this.ctx.font = ("75px 'Courier'");
-        //   this.ctx.fillText('GAME OVER', 60, 500)
-        // }, 1000)
-        // clearInterval(interval);
       } else {
         this.moveObjects();
         this.draw(this.ctx);
         if (this.isOver()) {
-          
           this.roundIsOver = true;
           let num = 0;
           for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
@@ -197,19 +199,14 @@ class Game {
               num += 1;
             }
           }
-          // console.log(this.ducks[this.ROUND].length)
           if (this.ducks[this.ROUND].length === 0 || this.ducks[this.ROUND].length === num) {
-            // console.log("ended")
             this.ROUND += 1;
             this.NUM_SHOTS = 3;
             this.roundIsOver = false;
           }
         }
       }
-      // console.log(this.ducks)
-      // console.log(this.ROUND)
-    }, 1)
-
+    }, 1);
   }
 
   // transition() {
@@ -353,12 +350,8 @@ class Game {
   
         for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
           if (this.ducks[this.ROUND][i] instanceof Duck && Utility.collision([x, y], this.ducks[this.ROUND][i])) {
-            // console.log(`vel[0] = ${this.ducks[this.ROUND][i].vel[0]}`);
-            // console.log(`vel[1] = ${this.ducks[this.ROUND][i].vel[1]}`);
             this.ducks[this.ROUND][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
             this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i], this.duck_falls.cloneNode(true));
-            // this.ctx.fillStyle = 'black';
-            // this.ctx.fillRect[x, y, 4, 4];
             this.updateScore(this.ducks[this.ROUND][i].points);
             // console.log(`${i} idx`)
           }
@@ -369,6 +362,8 @@ class Game {
         const y = e.pageY - gameboardTop - 7;
   
         if (x >= 485 && x <= 645 && y >= 275 && y <= 325) {
+          const clone = this.shotSound.cloneNode(true);
+          clone.play();
           alert('works');
         }
       }
