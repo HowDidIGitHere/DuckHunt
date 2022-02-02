@@ -16,12 +16,13 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: cadetblue;
+  // background-color: cadetblue;
 
-  // background-image: url('../arcade.jpg');
-  // background-repeat: no-repeat;
-  // background-position: center;
-  // background-size: cover;
+  background-image: url('../pixel_landscape.png');
+  background-repeat: no-repeat;
+  background-position: unset;
+  background-size: cover;
+  // opacity: 0.6;
 }
 
 #gameboard {
@@ -86,6 +87,21 @@ button {
   margin-right: 5px;
   border-radius: 35px 35px 35px 35px;
   cursor: pointer;
+}
+
+.volume {
+  height: 40px;
+  width: 40px;
+  margin-left: 5px;
+}
+
+// .vol-up {
+//   display: none;
+// }
+
+.mute {
+  height: 36px;
+  width: 36px;
 }
 
 .modal {
