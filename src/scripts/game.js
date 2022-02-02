@@ -34,9 +34,13 @@ class Game {
     
     this.createOnClickListener();
     if (this.intro) {
-      setTimeout(() => {
-        this.playIntro(this.ctx);
-      }, 200)
+      const introInterval = setInterval(() => {
+        if (!this.intro) {
+          clearInterval(introInterval);
+        } else {
+          this.playIntro(this.ctx);
+        }
+      }, 1)
     } else {
       this.countDown();
       this.ctx.fillText('GET READY!', 300, 200)
@@ -196,11 +200,11 @@ class Game {
           setTimeout(() => { //Play Again button
             this.ctx.fillStyle = 'black';
             this.ctx.strokeStyle = 'white';
-            this.roundRect(this.ctx, 485, 285, 160, 50, 10, true);
+            this.roundRect(this.ctx, 470, 285, 160, 50, 10, true);
 
             this.ctx.font = 'bold 20px Courier';
             this.ctx.fillStyle = 'white';
-            this.ctx.fillText('Play Again?', 500, 315)
+            this.ctx.fillText('Play Again?', 485, 315)
           }, 2000);
         }, 1000)
       } else {
