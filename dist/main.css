@@ -17,7 +17,10 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: cadetblue;
+  background-image: url("../pixel_landscape.png");
+  background-repeat: no-repeat;
+  background-position: unset;
+  background-size: cover;
 }
 
 #gameboard {
@@ -76,6 +79,17 @@ button {
   margin-right: 5px;
   border-radius: 35px 35px 35px 35px;
   cursor: pointer;
+}
+
+.volume {
+  height: 40px;
+  width: 40px;
+  margin-left: 5px;
+}
+
+.mute {
+  height: 36px;
+  width: 36px;
 }
 
 .modal {

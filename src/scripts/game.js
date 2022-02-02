@@ -7,7 +7,7 @@ import Dog from "./dog";
 import Logo from "./logo";
 
 class Game {
-  constructor(gameboard) {
+  constructor(gameboard, intro) {
     this.DIM_X = 800;
     this.DIM_Y = 770;
     this.NUM_SHOTS = 3;
@@ -15,11 +15,8 @@ class Game {
     this.TIMER = 10;
     this.ROUND = 0;
     this.BG_COLOR = "#7AD7F0";
-
-    this.intro = false;
-
     this.gameIsOver = false;
-
+    this.intro = intro;
     this.roundIsOver = false;
     this.dog = new Dog();
     this.logo = new Logo();
@@ -31,79 +28,50 @@ class Game {
     this.shotSound = document.getElementById('shot');
     this.duck_falls = document.getElementById('duck-falls');
     this.game_over = document.getElementById('game-over');
+    this.title_screen = document.getElementById('title-screen-song');
+    this.start_game = document.getElementById('start-game-song');
+    this.mute = document.getElementsByClassName('mute')[0];
     
     this.createOnClickListener();
-    // console.log(this.ducks)
-
-    // this.doggo();
-
-
-    this.playRound();
-
-    // // for (let i = 0; i < this.ducks.length; i += 1) {
-    //   this.temp = setInterval(() => {
-    //     if (this.ROUND > 4) {
-    //       clearInterval(this.temp);
-    //     }
-    //     this.moveObjects();
-    //     this.draw(this.ctx);
-    //     if (this.isOver()) {
-    //       this.roundIsOver = true;
-    //       this.roundIsOver = false;
-    //       setTimeout(() => {
-    //         //   clearInterval(this.temp);
-    //           console.log(this.ducks[this.ROUND]);
-    //           // alert('ROUND OVER')
-    //       }, 1000)
-    //       this.ROUND += 1;
-    //       this.NUM_SHOTS = 3;
-    //       this.TIMER = 10; 
-    //     }
-    //   }, 1);
-    // }
-
+    if (this.intro) {
+      setTimeout(() => {
+        this.playIntro(this.ctx);
+      }, 200)
+    } else {
+      this.countDown();
+      this.ctx.fillText('GET READY!', 300, 200)
+      setTimeout(() => {
+        this.countDown();
+        this.ctx.fillText('1...', 300, 200);
+        setTimeout(() => {
+          this.countDown();
+          this.ctx.fillText('2...', 350, 230);
+          setTimeout(() => {
+            this.countDown();
+            this.ctx.fillText('3...', 380, 260);
+            setTimeout(() => {
+              this.countDown();
+              this.ctx.fillText('GO!', 410, 290);
+            }, 1200);
+          }, 1200);
+        }, 1200);
+      }, 1200);
+      setTimeout(() => {
+        this.playRound();
+      }, 5600);
+    }
   }
-  
-  // doggo() {
-  //   let i = 1;
-  //   setInterval(() => {
-  //     this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
-  //     this.ctx.fillStyle = this.BG_COLOR;
-  //     this.ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
-  
-  //     this.foreground.draw(this.ctx);
-  //     this.ui.draw(this.ctx, this.NUM_SHOTS, this.ducks, this.SCORE);
-  //     this.dog.draw(this.ctx);
-  //     this.logo.draw(this.ctx);
-  //     i++;
-  //     console.log(i);
-  //   }, 1)
-  // }
 
-  // intro() {
+  countDown() {
+    this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
+    this.ctx.fillStyle = this.BG_COLOR;
+    this.ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
 
-  // }
-
-  awaitFunc() {
-    return new Promise(function(resolve, reject) {
-      setTimeout(function() {
-        resolve();
-      }, 1000)
-    });
-  };
-
-  async interval() {
-    const _await = await this.awaitFunc();
-
-    setTimeout(this.interval, 1000);
-  };
-
-  // overScreen() {
-  //   // console.log('done');
-  //   // alert('Game Over');
-  //   clearTimeout(arguments[0]);
-  //   clearInterval(arguments[1]);
-  // }
+    this.foreground.draw(this.ctx);
+    this.ui.draw(this.ctx, this.NUM_SHOTS, this.ducks, this.SCORE);
+    this.ctx.font = 'bold 60px Courier';
+    this.ctx.fillStyle = 'white';
+  }
 
   roundRect(ctx, x, y, width, height, radius, fill, stroke) {
     if (typeof stroke === 'undefined') {
@@ -137,12 +105,47 @@ class Game {
     if (stroke) {
       ctx.stroke();
     }
-  
+  }
+
+  playIntro(ctx) {
+    ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
+    ctx.fillStyle = this.BG_COLOR;
+    ctx.fillRect(0, 0, this.DIM_X, this.DIM_Y);
+
+    this.foreground.draw(ctx);
+    this.ui.draw(ctx, this.NUM_SHOTS, this.ducks, this.SCORE);
+
+    this.ctx.fillStyle = 'black';
+    this.ctx.strokeStyle = 'white';
+    this.roundRect(this.ctx, 300, 70, 400, 235, 10, true);
+
+    this.logo.draw(ctx)
+
+    this.ctx.fillStyle = 'black';
+    this.ctx.strokeStyle = 'white';
+    this.roundRect(this.ctx, 420, 290, 255, 50, 10, true);
+
+    this.ctx.font = 'bold 20px Courier';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText('Click Here To Play!', 435, 320)
+
+    const titleInterval = setInterval(() => {
+      if (!this.intro) {
+        clearInterval(titleInterval);
+        this.title_screen.pause();
+        this.title_screen.currentTime = 0;
+      } else {
+        if (this.mute.style.display === 'none') {
+          this.title_screen.play();
+        } else {
+          this.title_screen.pause();
+        }
+      }
+    }, 1);
   }
 
   playRound() {
     const interval = setInterval(() => {
-      // console.log(this.ROUND);
       if (this.ROUND > 4) {
         const timeout = setTimeout(() => {
           clearInterval(interval);
@@ -221,27 +224,18 @@ class Game {
     }, 1);
   }
 
-  // transition() {
-  //   this.draw(this.ctx);
-  //   this.ROUND += 1;
-  //   this.NUM_SHOTS = 3;
-  //   this.TIMER = 10;
-  //   console.log(this.ROUND);
-  // }
-
   removeDuck(idx) {
     if (this.ducks[this.ROUND][idx]) {
       this.ducks[this.ROUND].splice(idx, 1);
-      // console.log(this.ducks);
-      // this.ducks[this.ROUND] = this.ducks[this.ROUND].slice(idx, )
     }
   }
 
   shotFired() {
     this.NUM_SHOTS--;
-    const clone = this.shotSound.cloneNode(true);
-    clone.play();
-    // console.log(`${this.NUM_SHOTS} shots left.`)
+    if (this.mute.style.display === 'none') {
+      const clone = this.shotSound.cloneNode(true);
+      clone.play();
+    }
   }
 
   addRoundDucks() {
@@ -262,7 +256,7 @@ class Game {
   }
 
   randomStartPos() {
-    let x = Math.floor(this.DIM_X / 2);
+    let x = Math.floor(Math.random() * this.DIM_X);
     let y = this.DIM_Y - 301;
     return [x, y];
   }
@@ -351,21 +345,15 @@ class Game {
     const gameboardTop = this.gameboard.offsetTop + this.gameboard.clientTop;
 
     this.gameboard.addEventListener('click', (e) => {
-      if (this.NUM_SHOTS > 0 && this.ROUND <= 4 && !this.gameIsOver) {
+      if (this.NUM_SHOTS > 0 && this.ROUND <= 4 && !this.gameIsOver && !this.intro) {
         const x = e.pageX - gameboardLeft - 5;
         const y = e.pageY - gameboardTop;
-        // const x = e.pageX - gameboardLeft + 130;
-        // const y = e.pageY - gameboardTop - 5;
-
-        // const x = e.clientX - gameboardLeft;
-        // const y = e.clientY - gameboardTop - 179;
   
         for (let i = 0; i < this.ducks[this.ROUND].length; i++) {
           if (this.ducks[this.ROUND][i] instanceof Duck && Utility.collision([x, y], this.ducks[this.ROUND][i])) {
             this.ducks[this.ROUND][i].changeFrame({ sliceX: 262, sliceY: 460, width: 62, height: 58 });
             this.ducks[this.ROUND][i] = new ClickedDuck(this.ducks[this.ROUND][i], this.duck_falls.cloneNode(true));
             this.updateScore(this.ducks[this.ROUND][i].points);
-            // console.log(`${i} idx`)
           }
         }
         this.shotFired();
@@ -374,17 +362,26 @@ class Game {
         const y = e.pageY - gameboardTop - 7;
   
         if (x >= 485 && x <= 645 && y >= 275 && y <= 325) {
-          const clone = this.shotSound.cloneNode(true);
-          clone.play();
-          // alert('works');
+          this.start_game.play();
           this.ROUND = 0;
           const newGame = () => {
-            const again = new Game(this.gameboard);
+            const again = new Game(this.gameboard, false);
           }
           newGame();
         }
       } else if (this.intro) {
-        this.intro = false;
+        const x = e.pageX - gameboardLeft - 7;
+        const y = e.pageY - gameboardTop - 7;
+
+        if (x >= 420 && x <= 675 && y >= 290 && y <= 340) {
+          this.start_game.play();
+          this.intro = false;
+          this.ROUND = 0;
+          const newGame = () => {
+            const again = new Game(this.gameboard, false);
+          }
+          newGame();
+        }
       }
     })
   }
