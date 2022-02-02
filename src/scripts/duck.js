@@ -12,8 +12,6 @@ class Duck extends MovingObject {
 
     this.flap = flap;
     this.points = 1000;
-
-    // console.log(obj.vel);
   }
 
   move(idx) {

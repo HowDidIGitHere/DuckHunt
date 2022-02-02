@@ -2,7 +2,6 @@ class Foreground {
   constructor() {
     this.foreground = new Image();
     this.foreground.addEventListener('load', () => {
-      console.log('Loaded Foreground');
     }, false)
     this.foreground.src = 'duck_hunt_foreground.png';
   }

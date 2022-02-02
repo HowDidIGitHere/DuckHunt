@@ -7,7 +7,6 @@ class UiTracker {
 
     this.uiAssets = new Image();
     this.uiAssets.addEventListener('load', () => {
-      console.log('Loaded UI icons')
     })
     this.uiAssets.src = 'duck_hunt_assets.png';
   }

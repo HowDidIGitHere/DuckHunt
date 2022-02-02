@@ -2,7 +2,6 @@ class Dog {
   constructor() {
     this.dog = new Image();
     this.dog.addEventListener('load', () => {
-      console.log('Bark Bark')
     })
     this.dog.src = './mirrored_duck_hunt_assets.png';
   }

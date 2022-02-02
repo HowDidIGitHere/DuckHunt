@@ -19,7 +19,6 @@ class MovingObject {
 
     this.assets = new Image();
     this.assets.addEventListener('load', () => {
-      // console.log('Loaded assets Objects');
     }, false);
     this.assets.src = 'mirrored_duck_hunt_assets.png';
   }
