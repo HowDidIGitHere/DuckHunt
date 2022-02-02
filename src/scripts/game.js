@@ -15,6 +15,11 @@ class Game {
     this.TIMER = 10;
     this.ROUND = 0;
     this.BG_COLOR = "#7AD7F0";
+
+    this.intro = false;
+
+    this.gameIsOver = false;
+
     this.roundIsOver = false;
     this.dog = new Dog();
     this.logo = new Logo();
@@ -31,6 +36,8 @@ class Game {
     // console.log(this.ducks)
 
     // this.doggo();
+
+
     this.playRound();
 
     // // for (let i = 0; i < this.ducks.length; i += 1) {
@@ -71,6 +78,10 @@ class Game {
   //     i++;
   //     console.log(i);
   //   }, 1)
+  // }
+
+  // intro() {
+
   // }
 
   awaitFunc() {
@@ -135,6 +146,7 @@ class Game {
       if (this.ROUND > 4) {
         const timeout = setTimeout(() => {
           clearInterval(interval);
+          this.gameIsOver = true;
           this.game_over.play();
           this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y)
           this.ctx.fillStyle = this.BG_COLOR;
@@ -339,7 +351,7 @@ class Game {
     const gameboardTop = this.gameboard.offsetTop + this.gameboard.clientTop;
 
     this.gameboard.addEventListener('click', (e) => {
-      if (this.NUM_SHOTS > 0 && this.ROUND <= 4) {
+      if (this.NUM_SHOTS > 0 && this.ROUND <= 4 && !this.gameIsOver) {
         const x = e.pageX - gameboardLeft - 5;
         const y = e.pageY - gameboardTop;
         // const x = e.pageX - gameboardLeft + 130;
@@ -357,15 +369,22 @@ class Game {
           }
         }
         this.shotFired();
-      } else if (this.ROUND > 4) {
+      } else if (this.ROUND > 4 && this.gameIsOver) {
         const x = e.pageX - gameboardLeft - 7;
         const y = e.pageY - gameboardTop - 7;
   
         if (x >= 485 && x <= 645 && y >= 275 && y <= 325) {
           const clone = this.shotSound.cloneNode(true);
           clone.play();
-          alert('works');
+          // alert('works');
+          this.ROUND = 0;
+          const newGame = () => {
+            const again = new Game(this.gameboard);
+          }
+          newGame();
         }
+      } else if (this.intro) {
+        this.intro = false;
       }
     })
   }
