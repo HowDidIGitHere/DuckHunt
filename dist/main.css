@@ -5,7 +5,7 @@
   font-family: "Silkscreen";
   src: "./styles/silkscreen/slkscr.ttf";
 }
-body {
+.boop {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,9 +17,9 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("../pixel_landscape.png");
+  background-image: url(../pixel_landscape.png);
   background-repeat: no-repeat;
-  background-position: unset;
+  background-position: center;
   background-size: cover;
 }
 
@@ -43,7 +43,7 @@ a {
   margin-right: 5px;
 }
 
-header {
+.game-container {
   display: flex;
   align-items: flex-start;
   background-color: black;

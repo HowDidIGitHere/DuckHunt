@@ -3,7 +3,7 @@
   src: './styles/silkscreen/slkscr.ttf';
 }
 
-body {
+.boop {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,9 +18,10 @@ body {
   bottom: 0;
   // background-color: cadetblue;
 
-  background-image: url('../pixel_landscape.png');
+  background-image: url(../pixel_landscape.png);
+  // background: linear-gradient(#e66465, #9198e5);
   background-repeat: no-repeat;
-  background-position: unset;
+  background-position: center;
   background-size: cover;
   // opacity: 0.6;
 }
@@ -48,7 +49,7 @@ a {
   margin-right: 5px;
 }
 
-header {
+.game-container {
   display: flex;
   align-items: flex-start;
   background-color: black;
