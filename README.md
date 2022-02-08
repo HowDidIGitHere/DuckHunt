@@ -43,3 +43,7 @@ Add animation to game
 ## Bonus
 - Add harder difficulties with more ducks/less time
 - New settings with different targets
+
+## Acknowledgments
+- Of course this is an homage to the classic NES Duck Hunt game and Nintendo owns all rights. This fan cr3eation has no official connection to the original game, nor its later iterations.
+- The background was sourced from [WallpaperAccess](https://wallpaperaccess.com/aesthetic-pixel-art), so check them out!
