@@ -20,7 +20,7 @@ class MovingObject {
     this.assets = new Image();
     this.assets.addEventListener('load', () => {
     }, false);
-    this.assets.src = 'mirrored_duck_hunt_assets.png';
+    this.assets.src = './src/images/mirrored_duck_hunt_assets.png';
   }
 
   draw(ctx) {
