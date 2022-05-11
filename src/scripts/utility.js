@@ -8,10 +8,6 @@ const Utility = {
     return [x, y];
   },
   collision(clickPos, duck) {
-    // const x = Math.pow(Math.abs(duck.pos[0] - clickPos[0]), 2);
-    // const y = Math.pow(Math.abs(duck.pos[1] - clickPos[1]), 2);
-    // const d = Math.sqrt(x + y);
-    // return d < duck.radius;
     return this.inBetweenXOrY(clickPos[0], duck.pos[0], duck.width * 1.5) && 
       this.inBetweenXOrY(clickPos[1], duck.pos[1], duck.height * 1.5);
   },

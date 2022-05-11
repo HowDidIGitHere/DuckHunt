@@ -45,5 +45,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   
   const gameView = new GameView(ctx, gameboard);
-  // gameView.start();
 })

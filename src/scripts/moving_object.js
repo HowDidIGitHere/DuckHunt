@@ -9,14 +9,8 @@ class MovingObject {
     this.height = obj.height;
     this.sliceX = obj.sliceX;
     this.sliceY = obj.sliceY;
-
     this.mid = Utility.midpoint(this.pos[0], this.pos[1], this.width, this.height);
-
-    // this.color = obj.color;
-    // this.radius = obj.radius;
-    
     this.game = game;
-
     this.assets = new Image();
     this.assets.addEventListener('load', () => {
     }, false);
@@ -25,7 +19,6 @@ class MovingObject {
 
   draw(ctx) {
     if (this instanceof Duck) {
-      // const clone = this.game.flap.cloneNode(true);
       switch (true) {
         // right-up
         case this.vel[0] > 0 && this.vel[1] < 0 :
@@ -81,12 +74,10 @@ class MovingObject {
           }
           break;
 
-
         // // more up than right or left
         // case this.vel[0] > 0 && this.vel[1] < 0 :
         //   this.changeFrame({ sliceX: 342, sliceY: 377, width: 64, height: 62 })
         //   break;
-
 
         // more down than right or left
         // NEEDS NEW SPRITE
@@ -97,8 +88,6 @@ class MovingObject {
     if (this.flap > 75) {
       this.flap = 1;
     }
-    // ctx.fillstyle = 'brown';
-    // ctx.fillrect(this.pos[0], this.pos[1], this.width * 1.5, this.height * 1.5);
     ctx.drawImage(this.assets, this.sliceX, this.sliceY, this.width, 
       this.height, this.pos[0], this.pos[1], this.width * 1.5, this.height * 1.5);
   }

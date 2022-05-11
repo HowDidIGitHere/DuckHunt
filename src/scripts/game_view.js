@@ -5,25 +5,6 @@ class GameView {
     this.game = new Game(gameboard, true);
     this.ctx = ctx;
   }
-
-  start() {
-    // setInterval(() => {
-    //   this.game.moveObjects();
-    //   this.game.draw(this.ctx);
-    // }, 1);
-    // this.lastTime = 0;
-    // requestAnimationFrame(this.animate.bind(this));
-  }
-  
-  // animate(time) {
-  //   const timeDelta = time - this.lastTime;
-
-  //   this.game.step(timeDelta);
-  //   this.game.draw(this.ctx);
-  //   this.lastTime = time;
-
-  //   requestAnimationFrame(this.animate.bind(this));
-  // }
 }
 
 export default GameView;
