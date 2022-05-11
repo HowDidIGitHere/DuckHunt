@@ -8,7 +8,7 @@ class UiTracker {
     this.uiAssets = new Image();
     this.uiAssets.addEventListener('load', () => {
     })
-    this.uiAssets.src = 'duck_hunt_assets.png';
+    this.uiAssets.src = './src/images/duck_hunt_assets.png';
   }
 
   draw(ctx, numShots, ducks, score) {

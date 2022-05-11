@@ -3,7 +3,7 @@ class Foreground {
     this.foreground = new Image();
     this.foreground.addEventListener('load', () => {
     }, false)
-    this.foreground.src = 'duck_hunt_foreground.png';
+    this.foreground.src = './src/images/duck_hunt_foreground.png';
   }
 
   draw(ctx) {

@@ -3,7 +3,7 @@ class Logo {
     this.logo = new Image();
     this.logo.addEventListener('load', () => {
     })
-    this.logo.src = './duck_hunt_logo.png';
+    this.logo.src = './src/images/duck_hunt_logo.png';
   }
   
   draw(ctx) {

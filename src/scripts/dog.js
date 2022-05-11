@@ -3,7 +3,7 @@ class Dog {
     this.dog = new Image();
     this.dog.addEventListener('load', () => {
     })
-    this.dog.src = './mirrored_duck_hunt_assets.png';
+    this.dog.src = './src/images/mirrored_duck_hunt_assets.png';
   }
   
   draw(ctx) {
