@@ -16,23 +16,17 @@
   left: 0;
   right: 0;
   bottom: 0;
-  // background-color: cadetblue;
 
   background-image: url(../pixel_landscape.png);
-  // background: linear-gradient(#e66465, #9198e5);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  // opacity: 0.6;
 }
 
 #gameboard {
   border: 5px solid black;
   border-bottom: 0px;
   cursor: crosshair;
-
-  // width: 800px;
-  // height: 500px;
 }
 
 footer {
@@ -54,7 +48,6 @@ a {
   align-items: flex-start;
   background-color: black;
   padding: 20px;
-  // padding-bottom: 5px;
   border-radius: 35px 35px 35px 35px;
 }
 
@@ -65,7 +58,6 @@ ul {
 }
 
 h1, li {
-  // font-family: Silkscreen;
   font-size: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -76,7 +68,6 @@ nav {
 }
 
 button {
-  // font-family: Silkscreen;
   font-family: Courier;
   font-weight: bold;
   color: white;
@@ -95,10 +86,6 @@ button {
   width: 40px;
   margin-left: 5px;
 }
-
-// .vol-up {
-//   display: none;
-// }
 
 .mute {
   height: 36px;
@@ -130,7 +117,6 @@ button {
   color: black;
   float: right;
   font-size: 28px;
-  // font-family: Silkscreen;
   font-family: Courier;
   font-weight: bold;
 }
@@ -165,7 +151,6 @@ button {
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  // margin-right: 15px;
 }
 
 #panel > img {
