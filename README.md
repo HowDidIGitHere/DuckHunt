@@ -2,6 +2,8 @@
 
 https://howdidigithere.github.io/DuckHunt/
 
+![duck_hunt_gif](https://user-images.githubusercontent.com/41712908/153654664-90d80f3f-4c8e-4969-b44e-722ea00a15a7.gif)
+
 ## Background
 A throwback to the 1980's NES. This is a simple game with a clear objective, shoot the ducks before they fly away, but make sure not to miss! You only have three shots every round.
 
@@ -18,8 +20,8 @@ In addition, this project will include:
 - Instruction on how to play the game.
 - A README.md file.
 
-## Wireframes
-![webframe](https://raw.githubusercontent.com/HowDidIGitHere/DuckHunt/main/webframe.png)
+<!-- ## Wireframes
+![webframe](https://raw.githubusercontent.com/HowDidIGitHere/DuckHunt/main/webframe.png) -->
 
 ## Technologies
 - Canvas
@@ -40,6 +42,10 @@ Create pixel art for setting, and objects
 ### Day 7 Nov 3:
 Add animation to game
 
-## Bonus
+## To-be-implemented
 - Add harder difficulties with more ducks/less time
 - New settings with different targets
+
+## Acknowledgments
+- Of course this is an homage to the classic NES Duck Hunt game and [Nintendo](https://www.nintendo.com/) owns all rights. This fan creation has no official connection to the original game, nor its later iterations.
+- The background was sourced from [WallpaperAccess](https://wallpaperaccess.com/aesthetic-pixel-art), so check them out!
